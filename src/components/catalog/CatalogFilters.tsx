@@ -1,6 +1,34 @@
+import type { CSSProperties } from 'react';
 import type { Filters } from '../../features/catalog/selectors';
 import { locations } from '../../data/pets';
 import Icon from '../ui/Icon';
+import SelectMenu, { type SelectOption } from '../ui/SelectMenu';
+
+const locationOptions: SelectOption<string>[] = [
+  { value: 'all', label: 'Todo Lavalleja' },
+  ...locations.map((place) => ({ value: place, label: place })),
+];
+
+const ageOptions: SelectOption<Filters['age']>[] = [
+  { value: 'all', label: 'Todas las edades' },
+  { value: 'young', label: 'Joven' },
+  { value: 'adult', label: 'Adulto' },
+  { value: 'senior', label: 'Mayor' },
+];
+
+const sizeOptions: SelectOption<string>[] = [
+  { value: 'all', label: 'Todos los tamaños' },
+  { value: 'Pequeño', label: 'Pequeño' },
+  { value: 'Mediano', label: 'Mediano' },
+  { value: 'Grande', label: 'Grande' },
+];
+
+const energyOptions: SelectOption<Filters['energy']>[] = [
+  { value: 'all', label: 'Todas las energías' },
+  { value: 'calm', label: 'Más tranquila' },
+  { value: 'active', label: 'Más activa' },
+];
+
 interface Props {
   filters: Filters;
   expanded: boolean;
@@ -15,6 +43,9 @@ export default function CatalogFilters({
   onChange,
   onReset,
 }: Props) {
+  const activeFilters = [f.age, f.size, f.energy].filter(
+    (value) => value !== 'all',
+  ).length;
   return (
     <>
       <div className="catalog-toolbar">
@@ -47,20 +78,27 @@ export default function CatalogFilters({
             autoComplete="off"
             placeholder="Un nombre, una personalidad…"
           />
+          {f.query && (
+            <button
+              type="button"
+              className="search-clear"
+              aria-label="Borrar búsqueda"
+              onClick={() => onChange('query', '')}
+            >
+              <Icon name="close" />
+            </button>
+          )}
         </label>
-        <label className="location-select">
-          <Icon name="pin" />
-          <span className="sr-only">Localidad</span>
-          <select
-            value={f.location}
-            onChange={(e) => onChange('location', e.target.value)}
-          >
-            <option value="all">Todo Lavalleja</option>
-            {locations.map((place) => (
-              <option key={place}>{place}</option>
-            ))}
-          </select>
-        </label>
+        <SelectMenu
+          className="location-select"
+          variant="pill"
+          align="end"
+          icon="pin"
+          label="Localidad"
+          value={f.location}
+          options={locationOptions}
+          onChange={(value) => onChange('location', value)}
+        />
         <button
           className="filter-button"
           aria-expanded={expanded}
@@ -69,49 +107,57 @@ export default function CatalogFilters({
         >
           <Icon name="filter" />
           Filtros
+          {activeFilters > 0 && (
+            <span key={activeFilters} className="filter-count">
+              {activeFilters}
+            </span>
+          )}
         </button>
       </div>
-      <div className="filter-panel" id="filter-panel" hidden={!expanded}>
-        <label>
-          Etapa de vida
-          <select
-            value={f.age}
-            onChange={(e) => onChange('age', e.target.value as Filters['age'])}
+      <div
+        className={`filter-drawer ${expanded ? 'open' : ''}`}
+        id="filter-panel"
+        inert={!expanded}
+      >
+        <div className="filter-panel">
+          <div className="filter-field" style={{ '--i': 0 } as CSSProperties}>
+            <SelectMenu
+              variant="field"
+              align="end"
+              label="Etapa de vida"
+              value={f.age}
+              options={ageOptions}
+              onChange={(value) => onChange('age', value)}
+            />
+          </div>
+          <div className="filter-field" style={{ '--i': 1 } as CSSProperties}>
+            <SelectMenu
+              variant="field"
+              align="end"
+              label="Tamaño"
+              value={f.size}
+              options={sizeOptions}
+              onChange={(value) => onChange('size', value)}
+            />
+          </div>
+          <div className="filter-field" style={{ '--i': 2 } as CSSProperties}>
+            <SelectMenu
+              variant="field"
+              align="end"
+              label="Personalidad"
+              value={f.energy}
+              options={energyOptions}
+              onChange={(value) => onChange('energy', value)}
+            />
+          </div>
+          <button
+            className="text-link filter-reset"
+            style={{ '--i': 3 } as CSSProperties}
+            onClick={onReset}
           >
-            <option value="all">Todas las edades</option>
-            <option value="young">Joven</option>
-            <option value="adult">Adulto</option>
-            <option value="senior">Mayor</option>
-          </select>
-        </label>
-        <label>
-          Tamaño
-          <select
-            value={f.size}
-            onChange={(e) => onChange('size', e.target.value)}
-          >
-            <option value="all">Todos los tamaños</option>
-            <option>Pequeño</option>
-            <option>Mediano</option>
-            <option>Grande</option>
-          </select>
-        </label>
-        <label>
-          Personalidad
-          <select
-            value={f.energy}
-            onChange={(e) =>
-              onChange('energy', e.target.value as Filters['energy'])
-            }
-          >
-            <option value="all">Todas las energías</option>
-            <option value="calm">Más tranquila</option>
-            <option value="active">Más activa</option>
-          </select>
-        </label>
-        <button className="text-link" onClick={onReset}>
-          Limpiar filtros <Icon name="close" className="icon-sm" />
-        </button>
+            Limpiar filtros <Icon name="close" className="icon-sm" />
+          </button>
+        </div>
       </div>
     </>
   );

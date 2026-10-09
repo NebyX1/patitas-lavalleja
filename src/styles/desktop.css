@@ -59,10 +59,9 @@
   }
   .species-tab,
   .search-box input,
-  .location-select select,
+  .location-select .select-trigger,
   .filter-button,
-  .filter-panel label,
-  .filter-panel select {
+  .filter-field .select-trigger {
     font-size: var(--desktop-control);
   }
   .species-tab {
@@ -70,21 +69,21 @@
     padding-inline: 20px;
   }
   .search-box,
-  .location-select,
-  .filter-button {
+  .filter-button,
+  .location-select .select-trigger {
     min-height: 56px;
   }
-  .location-select select {
+  .location-select .select-value {
     max-width: 205px;
   }
   .catalog-meta,
   .sort-label,
-  .sort-label select,
+  .sort-label .select-trigger,
   .reset-chip,
   .catalog-bottom {
     font-size: var(--desktop-small);
   }
-  .sort-label select {
+  .sort-label .select-value {
     max-width: 200px;
   }
   .catalog-meta {
@@ -188,6 +187,7 @@
   }
   .interactive-panel .form-field input,
   .interactive-panel .form-field select,
+  .interactive-panel .form-field .select-trigger,
   .interactive-panel .form-field textarea {
     font-size: var(--desktop-copy);
   }

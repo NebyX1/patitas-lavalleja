@@ -111,7 +111,7 @@
   .location-select {
     max-width: 196px;
   }
-  .location-select select {
+  .location-select .select-value {
     max-width: 137px;
   }
   .match-copy {
@@ -615,9 +615,20 @@
     border: 0;
     padding-inline: 0;
   }
-  .location-select select {
+  .catalog-toolbar .location-select {
+    order: 3;
+    margin: 0;
     max-width: 100%;
+    flex: 1;
+  }
+  .catalog-toolbar .location-select .select-trigger {
+    min-height: 39px;
+    border: 0;
+    padding-inline: 0;
     font-size: 10px;
+  }
+  .catalog-toolbar .location-select .select-value {
+    max-width: 100%;
   }
   .catalog-toolbar .filter-button {
     order: 2;
@@ -633,10 +644,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
-  .filter-panel label {
-    font-size: 10px;
-  }
-  .filter-panel select {
+  .filter-field .select-trigger {
     font-size: 11px;
   }
   .catalog-meta {
@@ -646,8 +654,10 @@
   .sort-label {
     font-size: 9px;
   }
-  .sort-label select {
+  .sort-label .select-trigger {
     font-size: 9px;
+  }
+  .sort-label .select-value {
     max-width: 114px;
   }
   .pet-grid {
@@ -1139,6 +1149,7 @@
   }
   .form-field input,
   .form-field select,
+  .form-field .select-trigger,
   .form-field textarea {
     font-size: 16px;
   }

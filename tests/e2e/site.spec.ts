@@ -1,5 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+
+async function pickFormOption(page: Page, field: string, option: string) {
+  await page.getByRole('button', { name: new RegExp(`^${field}`) }).click();
+  await page.getByRole('option', { name: option, exact: true }).click();
+}
 
 test('catalog, client routing, tabs and persistent favorites', async ({
   page,
@@ -97,8 +102,8 @@ test('publishing shows a local preview without transmitting personal data', asyn
   });
   await page.goto('/publicar/');
   await page.getByLabel('Nombre de la mascota').fill('Pepita');
-  await page.getByLabel('Especie', { exact: true }).selectOption('Gato');
-  await page.getByLabel('Localidad', { exact: true }).selectOption('Minas');
+  await pickFormOption(page, 'Especie', 'Gato');
+  await pickFormOption(page, 'Localidad', 'Minas');
   await page
     .getByLabel('Su historia y sus necesidades')
     .fill('Una gatita tranquila que necesita un hogar seguro.');
@@ -196,7 +201,7 @@ test('adoption and volunteer flows validate and complete locally', async ({
   await page
     .getByLabel('Correo de contacto', { exact: true })
     .fill('alex@example.com');
-  await page.getByLabel('Localidad', { exact: true }).selectOption('Minas');
+  await pickFormOption(page, 'Localidad', 'Minas');
   await page
     .getByLabel('Contanos un poquito de tu hogar')
     .fill('Tengo tiempo para paseos diarios y un espacio seguro.');
@@ -213,7 +218,7 @@ test('adoption and volunteer flows validate and complete locally', async ({
   await page
     .getByLabel('Correo de contacto', { exact: true })
     .fill('alex@example.com');
-  await page.getByLabel('Localidad', { exact: true }).selectOption('Minas');
+  await pickFormOption(page, 'Localidad', 'Minas');
   await page
     .getByLabel('¿Cómo te gustaría ayudar?')
     .fill('Me gustaría colaborar sacando fotos.');

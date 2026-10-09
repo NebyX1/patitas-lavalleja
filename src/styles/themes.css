@@ -132,7 +132,7 @@ html[data-theme='dark'] .filter-button[aria-expanded='true'] {
 html[data-theme='dark'] .filter-panel {
   background: #1b2029;
 }
-html[data-theme='dark'] .filter-panel select {
+html[data-theme='dark'] .filter-field .select-trigger {
   border-color: var(--line);
 }
 html[data-theme='dark'] .pet-card {

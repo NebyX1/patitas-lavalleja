@@ -2,8 +2,19 @@ import { useEffect, useRef, useState, type SyntheticEvent } from 'react';
 import { locations } from '../../data/pets';
 import FormField from '../forms/FormField';
 import Icon from '../ui/Icon';
+import SelectMenu, { type SelectOption } from '../ui/SelectMenu';
 import { useClientState } from '../../features/preferences/useClientState';
 export type FormKind = 'adoption' | 'publish' | 'transit' | 'volunteer';
+const speciesOptions: SelectOption<string>[] = [
+  { value: '', label: 'Elegí una opción' },
+  { value: 'Perro', label: 'Perro' },
+  { value: 'Gato', label: 'Gato' },
+];
+const placeOptions: SelectOption<string>[] = [
+  { value: '', label: 'Elegí una localidad' },
+  ...locations.map((place) => ({ value: place, label: place })),
+  { value: 'Otra localidad', label: 'Otra localidad' },
+];
 export default function DemoForm({
   kind: initialKind,
   petName,
@@ -15,6 +26,8 @@ export default function DemoForm({
   const [kind, setKind] = useState(initialKind);
   const [preview, setPreview] = useState<Record<string, string> | null>(null);
   const [done, setDone] = useState(false);
+  const [species, setSpecies] = useState('');
+  const [place, setPlace] = useState('');
   const title = useRef<HTMLHeadingElement>(null);
   const isPublish = kind === 'publish';
   useEffect(() => {
@@ -42,6 +55,8 @@ export default function DemoForm({
       setDone(true);
     }
     form.reset();
+    setSpecies('');
+    setPlace('');
   }
   const finish = () => {
     setPreview(null);
@@ -159,11 +174,15 @@ export default function DemoForm({
                   />
                 </FormField>
                 <FormField label="Especie">
-                  <select name="species" required defaultValue="">
-                    <option value="">Elegí una opción</option>
-                    <option>Perro</option>
-                    <option>Gato</option>
-                  </select>
+                  <SelectMenu
+                    variant="form"
+                    label="Especie"
+                    name="species"
+                    required
+                    value={species}
+                    onChange={setSpecies}
+                    options={speciesOptions}
+                  />
                 </FormField>
               </>
             ) : (
@@ -190,13 +209,15 @@ export default function DemoForm({
               </>
             )}
             <FormField label="Localidad" full>
-              <select name="place" required defaultValue="">
-                <option value="">Elegí una localidad</option>
-                {locations.map((place) => (
-                  <option key={place}>{place}</option>
-                ))}
-                <option>Otra localidad</option>
-              </select>
+              <SelectMenu
+                variant="form"
+                label="Localidad"
+                name="place"
+                required
+                value={place}
+                onChange={setPlace}
+                options={placeOptions}
+              />
             </FormField>
             <FormField
               label={

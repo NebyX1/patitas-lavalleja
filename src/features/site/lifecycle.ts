@@ -103,6 +103,7 @@ function initPage() {
     document.body.classList.remove('locked', 'motion-ready');
   };
 }
+let restoringScroll = false;
 document.addEventListener('astro:before-swap', (event) => {
   const swap = event as TransitionBeforeSwapEvent;
   const transition = swap.viewTransition;
@@ -110,6 +111,7 @@ document.addEventListener('astro:before-swap', (event) => {
   // Handle that animation cancellation without hiding failures in the DOM update itself.
   void transition.ready.catch(() => undefined);
   if ($motionPaused.get()) transition.skipTransition();
+  restoringScroll = swap.navigationType === 'traverse';
   // Leaving a profile: the listing card for that pet receives the shared image name so the photo zooms back into it.
   // `location` already points at the destination during history navigation, so use the event's origin.
   const petPath = swap.from.pathname.match(/^\/mascotas\/[^/]+\/?$/)?.[0];
@@ -123,6 +125,19 @@ document.addEventListener('astro:before-swap', (event) => {
     }
   }
   cleanup?.();
+});
+// Astro restores the scroll position with a smooth scroll (html has scroll-behavior: smooth), which would
+// animate from the top while the new page is being captured. Jump there instantly instead.
+document.addEventListener('astro:after-swap', () => {
+  if (!restoringScroll) return;
+  restoringScroll = false;
+  const state = history.state;
+  if (typeof state?.scrollY === 'number')
+    window.scrollTo({
+      left: state.scrollX ?? 0,
+      top: state.scrollY,
+      behavior: 'instant',
+    });
 });
 document.addEventListener('click', (event) => {
   const back = (event.target as Element | null)?.closest<HTMLAnchorElement>(

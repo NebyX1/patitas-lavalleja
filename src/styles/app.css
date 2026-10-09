@@ -195,6 +195,7 @@ a.btn {
 }
 .interactive-panel .form-field input,
 .interactive-panel .form-field select,
+.interactive-panel .form-field .select-trigger,
 .interactive-panel .form-field textarea {
   font-size: 14px;
   min-height: 46px;
@@ -703,6 +704,7 @@ html[data-motion='paused']::view-transition-new(*) {
   }
   .interactive-panel .form-field input,
   .interactive-panel .form-field select,
+  .interactive-panel .form-field .select-trigger,
   .interactive-panel .form-field textarea {
     font-size: 16px;
   }

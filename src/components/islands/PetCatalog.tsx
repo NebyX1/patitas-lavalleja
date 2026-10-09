@@ -12,6 +12,14 @@ import { useClientState } from '../../features/preferences/useClientState';
 import PetCard from '../cards/PetCard';
 import CatalogFilters from '../catalog/CatalogFilters';
 import Icon from '../ui/Icon';
+import SelectMenu, { type SelectOption } from '../ui/SelectMenu';
+
+const sortOptions: SelectOption<Filters['sort']>[] = [
+  { value: 'default', label: 'Para descubrir' },
+  { value: 'name', label: 'Nombre: A a Z' },
+  { value: 'age', label: 'Más jóvenes primero' },
+  { value: 'senior', label: 'Mayores primero' },
+];
 
 export default function PetCatalog({
   favoritesOnly = false,
@@ -68,20 +76,17 @@ export default function PetCatalog({
               </button>
             )}
           </div>
-          <label className="sort-label">
+          <div className="sort-label">
             <span>Ordenar:</span>
-            <select
+            <SelectMenu
+              variant="inline"
+              align="end"
+              label="Ordenar"
               value={filters.sort}
-              onChange={(e) =>
-                update('sort', e.target.value as Filters['sort'])
-              }
-            >
-              <option value="default">Para descubrir</option>
-              <option value="name">Nombre: A a Z</option>
-              <option value="age">Más jóvenes primero</option>
-              <option value="senior">Mayores primero</option>
-            </select>
-          </label>
+              options={sortOptions}
+              onChange={(value) => update('sort', value)}
+            />
+          </div>
         </div>
       </fieldset>
       <div className="pet-grid" ref={grid}>
