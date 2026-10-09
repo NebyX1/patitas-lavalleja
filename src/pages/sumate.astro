@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DemoForm from '../components/islands/DemoForm';
+---
+
+<BaseLayout title="Todas las formas de ayudar cuentan">
+  <section class="flow-page wrap">
+    <div class="flow-heading">
+      <div class="eyebrow">
+        <span class="dot"></span>Tu tiempo también puede dejar huella
+      </div>
+      <h1>
+        Un pequeño
+        <br />
+        gesto.{' '}
+        <span>
+          Una
+          <br />
+          gran diferencia.
+        </span>
+      </h1>
+      <p>
+        Un hogar temporal, un paseo, un traslado o una buena foto. Descubrí cómo
+        podría empezar tu colaboración.
+      </p>
+      <a class="text-link" href="/#sumate">
+        Volver a las formas de ayudar ↗
+      </a>
+    </div>
+    <DemoForm kind="transit" client:load />
+  </section>
+</BaseLayout>

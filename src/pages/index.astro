@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Catalog from '../components/sections/Catalog.astro';
+import Match from '../components/sections/Match.astro';
+import Journey from '../components/sections/Journey.astro';
+import Stories from '../components/sections/Stories.astro';
+import Community from '../components/sections/Community.astro';
+import Faq from '../components/sections/Faq.astro';
+import Marquee from '../components/decorative/Marquee.astro';
+import StructuredData from '../components/seo/StructuredData.astro';
+import { faqs } from '../data/faqs';
+---
+
+<BaseLayout>
+  <StructuredData
+    slot="head"
+    data={{
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    }}
+  />
+  <Hero />
+  <Marquee />
+  <Catalog />
+  <Match />
+  <Journey />
+  <Stories />
+  <Community />
+  <Faq />
+</BaseLayout>

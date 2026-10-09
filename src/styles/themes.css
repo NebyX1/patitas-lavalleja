@@ -1,0 +1,396 @@
+/* The nocturnal identity uses the same layout, with electric accents and quiet luminous edges. */
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #101218;
+  --white: #191e27;
+  --ink: #f0f4e9;
+  --muted: #afb9bd;
+  --line: #323a44;
+  --orange: #c2ff62;
+  --orange-dark: #a3e645;
+  --lime: #c2ff62;
+  --lilac: #29203c;
+  --purple: #d2acff;
+  --green: #c2ff62;
+}
+html[data-theme='dark'] body {
+  background-image:
+    radial-gradient(ellipse 65% 620px at 82% 7%, #8241e712, transparent 80%),
+    radial-gradient(ellipse 55% 470px at 3% 40%, #b4ff5809, transparent 85%);
+}
+html[data-theme='dark'] ::selection {
+  background: var(--lime);
+  color: #101218;
+}
+html[data-theme='dark'] .brand-mark {
+  background: var(--lime);
+  color: #101218;
+  box-shadow: 0 0 25px #c2ff6226;
+}
+html[data-theme='dark'] .header.scrolled {
+  background: #101218ed;
+  border-color: #c2ff6215;
+  box-shadow: 0 10px 35px #0003;
+}
+html[data-theme='dark'] .theme-toggle {
+  border-color: #c2ff6260;
+  color: var(--lime);
+  box-shadow: 0 0 14px #c2ff6210;
+}
+html[data-theme='dark'] .btn-orange,
+html[data-theme='dark'] .btn-lime {
+  color: #142008;
+  background: var(--lime);
+  box-shadow: 0 0 24px #c2ff6220;
+}
+html[data-theme='dark'] .btn-orange:hover {
+  background: #d2ff91;
+  box-shadow: 0 0 32px #c2ff6233;
+}
+html[data-theme='dark'] .btn-dark {
+  background: #e9f0df;
+  color: #171e10;
+}
+html[data-theme='dark'] .btn-dark:hover {
+  background: #c2ff62;
+  box-shadow: 0 0 25px #c2ff6220;
+}
+html[data-theme='dark'] .circle-button:hover {
+  color: #16230b;
+}
+html[data-theme='dark'] .word-story {
+  text-shadow: 0 0 35px #c2ff6228;
+}
+html[data-theme='dark'] .hero-orbit,
+html[data-theme='dark'] .hero-orbit::after {
+  border-color: #c2ff6229;
+}
+html[data-theme='dark'] .hero-orbit::before {
+  box-shadow: 0 0 20px #c2ff6270;
+}
+html[data-theme='dark'] .hero-line {
+  color: #7b886b;
+}
+html[data-theme='dark'] .polaroid {
+  border-color: #434c39;
+  background: #1e242b;
+  box-shadow:
+    0 25px 65px #0006,
+    0 0 22px #c2ff6206;
+}
+html[data-theme='dark'] .polaroid:hover {
+  border-color: #c2ff6275;
+  box-shadow:
+    0 25px 70px #0006,
+    0 0 26px #c2ff6215;
+}
+html[data-theme='dark'] .hero-secondary {
+  border-color: #9366cf60;
+}
+html[data-theme='dark'] .polaroid-caption .circle-button {
+  color: #18250c;
+}
+html[data-theme='dark'] .hero-sticker {
+  background: var(--lime);
+  color: #17230c;
+  box-shadow: 0 0 40px #c2ff621a;
+}
+html[data-theme='dark'] .hello-bubble {
+  background: #caa1fc;
+  color: #28123e;
+  box-shadow: 0 0 22px #b879fc20;
+}
+html[data-theme='dark'] .hero-bottom .eyebrow {
+  color: var(--muted);
+}
+html[data-theme='dark'] .hero-dots i {
+  background: #566246;
+}
+html[data-theme='dark'] .hero-dots i.active {
+  background: var(--lime);
+}
+html[data-theme='dark'] .photo-caption-pill,
+html[data-theme='dark'] .pet-location {
+  color: #263322;
+  background: #fffef1ed;
+}
+html[data-theme='dark'] .marquee {
+  background: #171d15;
+  border-color: #c2ff6222;
+}
+html[data-theme='dark'] .species-tabs {
+  background: #222832;
+}
+html[data-theme='dark'] .species-tab.active {
+  background: var(--lime);
+  color: #16200b;
+}
+html[data-theme='dark'] .filter-button[aria-expanded='true'] {
+  background: #332344;
+  border-color: #b987ed70;
+}
+html[data-theme='dark'] .filter-panel {
+  background: #1b2029;
+}
+html[data-theme='dark'] .filter-panel select {
+  border-color: var(--line);
+}
+html[data-theme='dark'] .pet-card {
+  background: #191e27;
+  border-color: #333d3c;
+}
+html[data-theme='dark'] .pet-card:hover {
+  border-color: #c2ff6260;
+  box-shadow:
+    0 15px 40px #0004,
+    0 0 22px #c2ff620c;
+}
+html[data-theme='dark'] .pet-badge {
+  color: #263322;
+}
+html[data-theme='dark'] .pet-quote {
+  border-color: var(--line);
+  color: var(--muted);
+}
+html[data-theme='dark'] .fav-button {
+  color: #25301d;
+}
+html[data-theme='dark'] .fav-button.saved {
+  color: #17220b;
+  background: var(--lime);
+  box-shadow: 0 0 15px #c2ff6228;
+}
+html[data-theme='dark'] .pet-image-action {
+  color: #18250c;
+}
+html[data-theme='dark'] .pet-name-row > .icon {
+  color: #98a78d;
+}
+html[data-theme='dark'] .empty-state {
+  background: #1b2029;
+}
+html[data-theme='dark'] .match-block {
+  background: #272035;
+  border: 1px solid #b88aee30;
+}
+html[data-theme='dark'] .match-copy .eyebrow,
+html[data-theme='dark'] .match-copy p {
+  color: #c6b3da;
+}
+html[data-theme='dark'] .match-orbit,
+html[data-theme='dark'] .match-orbit::after {
+  border-color: #b88aee40;
+}
+html[data-theme='dark'] .match-photo {
+  border-color: #d4b4f5;
+  box-shadow: 0 15px 45px #0004;
+}
+html[data-theme='dark'] .match-center {
+  background: #caa1fc;
+  color: #271139;
+  border-color: #272035;
+  box-shadow: 0 0 30px #b78aff26;
+}
+html[data-theme='dark'] .match-chip {
+  background: #392b4c;
+  border: 1px solid #b88aee30;
+  color: #e1cbfa;
+}
+html[data-theme='dark'] .match-art small {
+  color: #c6b3da;
+}
+html[data-theme='dark'] .step-icon {
+  background: #242e20;
+  color: var(--lime);
+}
+html[data-theme='dark'] .step-num {
+  color: #9daa93;
+}
+html[data-theme='dark'] .step {
+  border-color: var(--line);
+}
+html[data-theme='dark'] .story-shell {
+  background: #202a1c;
+  color: var(--ink);
+  border: 1px solid #c2ff6224;
+}
+html[data-theme='dark'] .story-copy h2 span {
+  color: #d5e7ba;
+}
+html[data-theme='dark'] .story-copy p {
+  color: #bdcbb0;
+}
+html[data-theme='dark'] .story-copy .eyebrow {
+  color: #c0d5ab;
+}
+html[data-theme='dark'] .story-end small {
+  color: #bdcbb0;
+}
+html[data-theme='dark'] .story-nav .circle-button {
+  background: #303e25;
+  color: var(--lime);
+  border-color: #c2ff6240;
+}
+html[data-theme='dark'] .story-image-label {
+  background: #101218dc;
+  color: #edf4e2;
+}
+html[data-theme='dark'] .help-card {
+  background: #1c231c;
+  border: 1px solid #c2ff6224;
+}
+html[data-theme='dark'] .help-card:nth-child(2) {
+  background: #252032;
+  border-color: #b88aee30;
+}
+html[data-theme='dark'] .help-card:nth-child(3) {
+  background: #252326;
+  border-color: #d9b89130;
+}
+html[data-theme='dark'] .help-card > .icon {
+  color: var(--lime);
+}
+html[data-theme='dark'] .help-card:nth-child(2) > .icon {
+  color: #caa1fc;
+}
+html[data-theme='dark'] .help-card h3 {
+  color: var(--ink);
+}
+html[data-theme='dark'] .help-card p {
+  color: var(--muted);
+}
+html[data-theme='dark'] .help-card:hover {
+  box-shadow: 0 0 30px #c2ff620b;
+}
+html[data-theme='dark'] .faq details {
+  border-color: var(--line);
+}
+html[data-theme='dark'] .footer {
+  background: #151a13;
+  color: #edf4e3;
+  border-top: 1px solid #c2ff6224;
+}
+html[data-theme='dark'] .footer .brand-mark {
+  background: var(--lime);
+  color: #16200b;
+}
+html[data-theme='dark'] .footer-links a,
+html[data-theme='dark'] .footer-links button,
+html[data-theme='dark'] .footer-tag {
+  color: #b7c7a6;
+}
+html[data-theme='dark'] .footer-links a:hover {
+  color: var(--lime);
+}
+html[data-theme='dark'] .footer-word {
+  color: #d8f7b1;
+  opacity: 0.85;
+  border-color: #c2ff6230;
+  text-shadow: 0 0 70px #c2ff621a;
+}
+html[data-theme='dark'] .footer-word .icon {
+  color: var(--lime);
+}
+html[data-theme='dark'] .footer-bottom {
+  color: #bbcbaa;
+  border-color: #c2ff6225;
+}
+html[data-theme='dark'] .motion-button {
+  color: #c9dfb3;
+}
+html[data-theme='dark'] .mobile-bottom {
+  background: #151a21f2;
+  border-color: #c2ff6225;
+  backdrop-filter: blur(18px);
+}
+html[data-theme='dark'] .interactive-panel {
+  background: #191e27;
+  border-color: #c2ff6220;
+  box-shadow: 0 20px 60px #0002;
+}
+html[data-theme='dark'] .quiz-progress span {
+  background: #3b4447;
+}
+html[data-theme='dark'] .quiz-progress span.on {
+  background: var(--lime);
+  box-shadow: 0 0 12px #c2ff6220;
+}
+html[data-theme='dark'] .quiz-option {
+  background: #1e2530;
+  border-color: #39434b;
+}
+html[data-theme='dark'] .quiz-option > .icon {
+  color: #bad09d;
+}
+html[data-theme='dark'] .quiz-option.selected {
+  background: #293724;
+  border-color: #c2ff626b;
+}
+html[data-theme='dark'] .quiz-option.selected .choice-dot {
+  background: var(--lime);
+  border-color: var(--lime);
+}
+html[data-theme='dark'] .quiz-option.selected .choice-dot::after {
+  background: #1a280f;
+}
+html[data-theme='dark'] .demo-notice {
+  background: #253023;
+  color: #c2d7ab;
+}
+html[data-theme='dark'] .profile-page {
+  background: #191e27;
+  border-color: #c2ff6224;
+}
+html[data-theme='dark'] .profile-visual {
+  background: #21272d;
+}
+html[data-theme='dark'] .profile-visual-tag {
+  color: #1a2810;
+}
+html[data-theme='dark'] .profile-info > .eyebrow {
+  color: #b6c4a9;
+}
+html[data-theme='dark'] .profile-title-row .fav-button {
+  color: var(--lime);
+  border-color: #c2ff6240;
+}
+html[data-theme='dark'] .profile-title-row .fav-button.saved {
+  color: #17220b;
+}
+html[data-theme='dark'] .profile-caretaker {
+  background: #232d21;
+}
+html[data-theme='dark'] .caretaker-icon {
+  background: #303e28;
+  color: var(--lime);
+}
+html[data-theme='dark'] .personality-chips span,
+html[data-theme='dark'] .compat-item b {
+  background: #283326;
+  color: #d0e4ba;
+}
+html[data-theme='dark'] .compat-item .icon,
+html[data-theme='dark'] .care-list .icon {
+  color: var(--lime);
+}
+html[data-theme='dark'] .energy-bars i {
+  background: #3a4640;
+}
+html[data-theme='dark'] .energy-bars i.on {
+  background: var(--lime);
+}
+html[data-theme='dark'] .profile-disclaimer {
+  color: var(--muted);
+}
+html[data-theme='dark'] .toast {
+  background: #283623;
+  color: #e6f5d8;
+  border: 1px solid #c2ff6230;
+  box-shadow: 0 0 28px #0003;
+}
+html[data-theme='dark'] .success-icon {
+  color: #19260f;
+}
+html[data-theme='dark'] dialog::backdrop {
+  background: #090c14bf;
+}

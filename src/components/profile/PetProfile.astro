@@ -1,0 +1,91 @@
+---
+import type { Pet } from '../../types/pet';
+import { petPhoto } from '../../config/site';
+import Icon from '../ui/Icon.astro';
+import FavoriteButton from '../islands/FavoriteButton';
+import ProfileTabs from '../islands/ProfileTabs';
+import ShareButton from '../islands/ShareButton';
+import PhotoLightbox from '../islands/PhotoLightbox';
+interface Props {
+  pet: Pet;
+}
+const { pet: p } = Astro.props;
+---
+
+<div class="profile-shell profile-page">
+  <div class="profile-visual">
+    <div class="profile-main-photo" style={`--pos:${p.pos}`}>
+      <img
+        src={petPhoto(p.id)}
+        width="960"
+        height="960"
+        alt={p.alt}
+        fetchpriority="high"
+        transition:name="pet-photo"
+      />
+    </div>
+    <div class="profile-visual-tag">
+      <Icon name="paw" class="icon-sm" />
+      Una familia por imaginar
+    </div>
+    <PhotoLightbox id={p.id} alt={p.alt} client:idle />
+    <div class="profile-photo-label">
+      <span>
+        <Icon name="pin" />
+        {p.location}, Lavalleja
+      </span>
+      <small>Fotografía ilustrativa</small>
+    </div>
+  </div>
+  <div class="profile-info">
+    <div class="eyebrow">
+      <span class="dot"></span>Perfil de demostración
+    </div>
+    <div class="profile-title-row">
+      <h1>{p.name}</h1>
+      <FavoriteButton id={p.id} name={p.name} client:load />
+    </div>
+    <p class="profile-lead">{p.quote} Un nuevo comienzo podría ser con vos.</p>
+    <dl class="profile-facts">
+      <div>
+        <dt>
+          <Icon name="clock" />
+          Edad
+        </dt>
+        <dd>{p.age}</dd>
+      </div>
+      <div>
+        <dt>
+          <Icon name="size" />
+          Tamaño
+        </dt>
+        <dd>{p.size}</dd>
+      </div>
+      <div>
+        <dt>
+          <Icon name={p.species} />
+          Sexo
+        </dt>
+        <dd>{p.sex}</dd>
+      </div>
+    </dl>
+    <ProfileTabs pet={p} client:load />
+    <div class="profile-caretaker">
+      <span class="caretaker-icon">
+        <Icon name="shield" />
+      </span>
+      <div>
+        <b>Un encuentro acompañado</b>
+        <small>Las necesidades se conversan con el equipo a cargo.</small>
+      </div>
+    </div>
+    <a class="btn btn-orange profile-cta" href={`/solicitud/${p.id}/`}>
+      Quiero conocer a {p.name}
+      <Icon name="arrow-up" class="icon-sm" />
+    </a>
+    <p class="profile-disclaimer">
+      Recorrido de ejemplo. No reserva ni envía una solicitud real.
+    </p>
+    <ShareButton id={p.id} name={p.name} client:idle />
+  </div>
+</div>

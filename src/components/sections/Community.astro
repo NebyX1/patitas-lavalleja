@@ -1,0 +1,47 @@
+---
+import HelpCard from '../cards/HelpCard.astro';
+const ways = [
+  {
+    href: '/sumate/?tipo=transit',
+    icon: 'home',
+    title: 'Un hogar de tránsito',
+    description:
+      'Un lugar temporal puede ser el puente hacia una familia para siempre.',
+  },
+  {
+    href: '/sumate/?tipo=volunteer',
+    icon: 'people',
+    title: 'Un poquito de tu tiempo',
+    description:
+      'Pasear, trasladar, sacar fotos. Tus ganas también pueden dejar huella.',
+  },
+  {
+    href: '/adopcion/',
+    icon: 'share',
+    title: 'Una historia compartida',
+    description:
+      'Quizás vos no podés adoptar. Pero alguien que te lee está esperando encontrarlo.',
+  },
+];
+---
+
+<section class="community wrap" id="sumate" aria-labelledby="community-title">
+  <div class="section-heading reveal">
+    <div>
+      <div class="eyebrow">
+        <span class="dot"></span> Todas las formas de ayudar cuentan
+      </div>
+      <h2 id="community-title">
+        No hace falta adoptar
+        <br />
+        para cambiar una vida.
+      </h2>
+    </div>
+    <p>Un rincón de tu casa, un poco de tu tiempo o una historia compartida.</p>
+  </div>
+  <div class="help-grid">
+    {ways.map((way) => (
+      <HelpCard {...way} />
+    ))}
+  </div>
+</section>

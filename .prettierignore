@@ -1,0 +1,7 @@
+node_modules
+dist
+.astro
+Patitas_Lavalleja_Boceto_Interactivo.html
+public
+test-results
+playwright-report

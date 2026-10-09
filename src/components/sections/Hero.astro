@@ -1,0 +1,85 @@
+---
+import HeroGallery from '../islands/HeroGallery';
+---
+
+<section class="hero wrap" aria-labelledby="hero-title">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">
+        <span class="dot"></span> Un nuevo comienzo, acá en Lavalleja
+      </div>
+      <h1 id="hero-title">
+        Tu próxima
+        <br />
+        gran{' '}
+        <span class="word-story">
+          historia
+          <svg viewBox="0 0 390 22" aria-hidden="true" fill="none">
+            <path
+              d="M5 13C95 1 277 1 386 9M64 20c86-10 178-11 265-7"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+        <br />
+        tiene patitas.
+      </h1>
+      <p class="hero-description">
+        Algunas de las mejores cosas de la vida llegan en cuatro patas. Encontrá
+        a ese alguien que está esperando conocerte.
+      </p>
+      <div class="hero-actions">
+        <a href="/adopcion/" class="btn btn-orange">
+          Conocé a tu próximo amigo{' '}
+          <svg class="icon">
+            <use href="#i-arrow-up" />
+          </svg>
+        </a>
+        <a class="text-link" href="/tu-match/">
+          <svg class="icon">
+            <use href="#i-spark" />
+          </svg>{' '}
+          ¿Quién va con vos?
+        </a>
+      </div>
+      <div class="hero-note">
+        <div class="tiny-avatars" aria-hidden="true">
+          <img
+            src="/images/pets/milo-480.webp"
+            width="480"
+            height="480"
+            alt=""
+          />
+          <img
+            src="/images/pets/mora-480.webp"
+            width="480"
+            height="480"
+            alt=""
+          />
+          <img
+            src="/images/pets/luna-480.webp"
+            width="480"
+            height="480"
+            alt=""
+          />
+        </div>
+        <div>
+          <strong>Hay una historia para cada hogar.</strong>
+          <span>La tuya puede empezar con un hola.</span>
+        </div>
+      </div>
+    </div>
+    <HeroGallery client:load />
+  </div>
+  <div class="hero-bottom">
+    <a class="scroll-cue" href="/adopcion/">
+      <svg class="icon">
+        <use href="#i-down" />
+      </svg>{' '}
+      Hay mucho por conocer
+    </a>
+    <span class="eyebrow">Adoptar es elegir acompañarse</span>
+  </div>
+</section>

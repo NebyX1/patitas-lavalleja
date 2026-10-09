@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DemoForm from '../components/islands/DemoForm';
+---
+
+<BaseLayout title="Dar en adopción: preparar una ficha" noindex>
+  <section class="flow-page wrap">
+    <div class="flow-heading">
+      <div class="eyebrow">
+        <span class="dot"></span>Un nuevo comienzo
+      </div>
+      <h1>
+        Una historia
+        <br />
+        por encontrar
+        <br />
+        <span>hogar.</span>
+      </h1>
+      <p>
+        Conocer su personalidad, sus rutinas y sus necesidades es el primer
+        paso. Probá cómo se prepararía una ficha para su revisión.
+      </p>
+      <a class="text-link" href="/sobre-patitas/">
+        Conocé esta versión de Patitas ↗
+      </a>
+    </div>
+    <DemoForm kind="publish" client:load />
+  </section>
+</BaseLayout>

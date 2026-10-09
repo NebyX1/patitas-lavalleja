@@ -1,0 +1,72 @@
+---
+import Brand from './Brand.astro';
+import Icon from '../ui/Icon.astro';
+import MotionToggle from '../islands/MotionToggle';
+---
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <Brand />
+        <div class="footer-tag">Un hogar lo cambia todo.</div>
+      </div>
+      <div class="footer-links">
+        <div>
+          <strong>Encontrarnos</strong>
+          <a href="/adopcion/">Todas las patitas</a>
+          <a href="/favoritos/">Mis favoritos</a>
+          <a href="/tu-match/">¿Quién va con vos?</a>
+        </div>
+        <div>
+          <strong>Acompañarnos</strong>
+          <a href="/#como-funciona">Cómo funciona</a>
+          <a href="/#sumate">Quiero ayudar</a>
+          <a href="/publicar/">Dar en adopción</a>
+        </div>
+        <div>
+          <strong>Hecho con cariño</strong>
+          <a href="/#historias">Nuevas historias</a>
+          <a href="/sobre-patitas/">Sobre Patitas</a>
+          <a href="/privacidad/">Tus datos</a>
+          <a
+            href="https://www.lavalleja.gub.uy/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Intendencia de Lavalleja <Icon name="arrow-up" class="icon-sm" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-word" aria-hidden="true">
+      patitas.
+      <Icon name="paw" />
+    </div>
+    <div class="footer-bottom">
+      <span>Patitas Lavalleja · Perfiles e historias de demostración.</span>
+      <MotionToggle client:load />
+      <a href="#contenido" class="scroll-cue">
+        Volver arriba <Icon name="arrow-up" class="icon-sm" />
+      </a>
+    </div>
+  </div>
+</footer>
+<nav class="mobile-bottom" aria-label="Accesos rápidos">
+  <a href="/adopcion/">
+    <Icon name="paw" />
+    Explorar
+  </a>
+  <a href="/favoritos/">
+    <Icon name="heart" />
+    Favoritos
+  </a>
+  <a href="/tu-match/">
+    <Icon name="spark" />
+    Tu match
+  </a>
+  <a href="/publicar/">
+    <Icon name="plus" />
+    Publicar
+  </a>
+</nav>

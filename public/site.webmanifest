@@ -1,0 +1,13 @@
+{
+  "name": "Patitas Lavalleja",
+  "short_name": "Patitas",
+  "lang": "es-UY",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f5ef",
+  "theme_color": "#c84628",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

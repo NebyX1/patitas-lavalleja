@@ -1,0 +1,43 @@
+<script is:inline>
+  (() => {
+    function applyTheme(root) {
+      let savedTheme = null,
+        savedMotion = null;
+      try {
+        savedTheme = localStorage.getItem('patitas-theme');
+        savedMotion = localStorage.getItem('patitas-motion');
+      } catch (_) {}
+      const theme =
+        savedTheme === 'dark' ||
+        (savedTheme !== 'light' &&
+          matchMedia('(prefers-color-scheme: dark)').matches)
+          ? 'dark'
+          : 'light';
+      root.dataset.theme = theme;
+      root.dataset.motion = (
+        savedMotion
+          ? savedMotion === 'paused'
+          : matchMedia('(prefers-reduced-motion: reduce)').matches
+      )
+        ? 'paused'
+        : 'active';
+      return theme;
+    }
+    const theme = applyTheme(document.documentElement);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', theme === 'dark' ? '#101218' : '#f7f5ef');
+    if (!window.__patitasThemeInitialized) {
+      window.__patitasThemeInitialized = true;
+      document.addEventListener('astro:before-swap', (event) => {
+        const nextTheme = applyTheme(event.newDocument.documentElement);
+        event.newDocument
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute(
+            'content',
+            nextTheme === 'dark' ? '#101218' : '#f7f5ef',
+          );
+      });
+    }
+  })();
+</script>

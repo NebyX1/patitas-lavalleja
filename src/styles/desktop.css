@@ -1,0 +1,419 @@
+/* Keep the sketch's editorial proportions readable on large desktop displays. */
+@media (min-width: 1061px) {
+  :root {
+    --desktop-copy: clamp(16px, 1vw, 20px);
+    --desktop-control: clamp(14px, 0.91vw, 18px);
+    --desktop-label: clamp(11px, 0.72vw, 14px);
+    --desktop-small: clamp(12px, 0.78vw, 15px);
+  }
+
+  .nav {
+    gap: 32px;
+  }
+  .nav-links {
+    gap: clamp(24px, 1.8vw, 36px);
+  }
+  .nav-links a,
+  .btn,
+  .btn-small,
+  .text-link,
+  .match-copy .btn {
+    font-size: var(--desktop-control);
+  }
+  .eyebrow,
+  .hero .eyebrow,
+  .topline,
+  .topline-label,
+  .marquee b {
+    font-size: var(--desktop-label);
+  }
+  .hero-description {
+    max-width: 460px;
+    font-size: var(--desktop-copy);
+    line-height: 1.85;
+  }
+  .hero-actions {
+    gap: 26px;
+    margin-top: 32px;
+  }
+  .hero-note strong,
+  .hero-note span,
+  .hero-bottom,
+  .hero-bottom .eyebrow,
+  .hero-controls small,
+  .polaroid-caption span,
+  .photo-caption-pill {
+    font-size: var(--desktop-small);
+  }
+  .section-heading {
+    gap: 48px;
+    margin-bottom: 42px;
+  }
+  .section-heading p {
+    max-width: 340px;
+    font-size: var(--desktop-copy);
+  }
+  .catalog-toolbar {
+    gap: 18px;
+    padding-block: 26px;
+  }
+  .species-tab,
+  .search-box input,
+  .location-select select,
+  .filter-button,
+  .filter-panel label,
+  .filter-panel select {
+    font-size: var(--desktop-control);
+  }
+  .species-tab {
+    min-height: 44px;
+    padding-inline: 20px;
+  }
+  .search-box,
+  .location-select,
+  .filter-button {
+    min-height: 56px;
+  }
+  .location-select select {
+    max-width: 205px;
+  }
+  .catalog-meta,
+  .sort-label,
+  .sort-label select,
+  .reset-chip,
+  .catalog-bottom {
+    font-size: var(--desktop-small);
+  }
+  .sort-label select {
+    max-width: 200px;
+  }
+  .catalog-meta {
+    margin-block: 26px;
+  }
+  .pet-grid {
+    gap: 28px;
+  }
+  .pet-card {
+    padding-bottom: 22px;
+  }
+  .pet-info {
+    padding: 18px 12px 0;
+  }
+  .pet-badge,
+  .pet-location {
+    font-size: var(--desktop-label);
+  }
+  .pet-badge {
+    max-width: calc(100% - 74px);
+  }
+  .pet-name-row h3 {
+    font-size: clamp(28px, 1.8vw, 35px);
+  }
+  .pet-facts,
+  .pet-quote {
+    font-size: var(--desktop-control);
+    line-height: 1.7;
+  }
+  .pet-facts {
+    flex-wrap: wrap;
+  }
+  .pet-quote {
+    margin-top: 17px;
+    padding-top: 15px;
+  }
+  .match-copy p,
+  .step p,
+  .story-copy p,
+  .help-card p,
+  .faq p,
+  .faq details p {
+    font-size: var(--desktop-copy);
+    line-height: 1.85;
+  }
+  .match-copy p {
+    max-width: 450px;
+  }
+  .step p {
+    max-width: 410px;
+  }
+  .story-copy p {
+    max-width: 460px;
+  }
+  .help-card p {
+    max-width: 380px;
+  }
+  .faq p {
+    max-width: 350px;
+  }
+  .faq summary {
+    font-size: var(--desktop-copy);
+    padding-block: 24px;
+  }
+  .step h3,
+  .help-card h3 {
+    font-size: clamp(22px, 1.4vw, 28px);
+  }
+  .match-chip,
+  .match-art small,
+  .story-end small,
+  .story-image-label,
+  .footer-links strong,
+  .footer-bottom,
+  .motion-button {
+    font-size: var(--desktop-small);
+  }
+  .footer-links {
+    gap: clamp(40px, 4vw, 80px);
+  }
+  .footer-links a,
+  .footer-links button {
+    font-size: var(--desktop-control);
+  }
+  .footer-bottom {
+    padding-block: 24px 4px;
+  }
+  .flow-heading p,
+  .prose-page p,
+  .profile-page .profile-panel p,
+  .profile-lead {
+    font-size: var(--desktop-copy);
+  }
+  .interactive-panel .form-field,
+  .interactive-panel .quiz-option b,
+  .profile-page .profile-tab,
+  .profile-facts dd,
+  .profile-page .profile-cta,
+  .share-profile .text-link {
+    font-size: var(--desktop-control);
+  }
+  .interactive-panel .form-field input,
+  .interactive-panel .form-field select,
+  .interactive-panel .form-field textarea {
+    font-size: var(--desktop-copy);
+  }
+  .interactive-panel .quiz-option small,
+  .interactive-panel .quiz-footnote,
+  .interactive-panel .form-checkbox,
+  .interactive-panel .demo-notice,
+  .profile-page .profile-info > .eyebrow,
+  .profile-facts dt,
+  .profile-page .profile-caretaker small,
+  .profile-page .profile-disclaimer,
+  .profile-photo-label,
+  .profile-photo-label small {
+    font-size: var(--desktop-small);
+  }
+  .profile-page .profile-caretaker b {
+    font-size: var(--desktop-control);
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --wrap: clamp(1320px, 85.94vw, 1650px);
+  }
+  html {
+    scroll-padding-top: 136px;
+  }
+  .topline {
+    height: 42px;
+  }
+  .nav {
+    height: clamp(96px, 5.93vw, 114px);
+  }
+  .brand-mark {
+    width: 52px;
+    height: 52px;
+    border-radius: 18px;
+  }
+  .brand-mark svg {
+    width: 35px;
+    height: 35px;
+  }
+  .brand-type strong {
+    font-size: 41px;
+  }
+  .brand-type small {
+    font-size: 10px;
+  }
+  .nav-actions {
+    gap: 16px;
+  }
+  .nav-actions .circle-button {
+    width: 52px;
+    height: 52px;
+  }
+  .btn-small {
+    min-height: 52px;
+    padding-inline: 24px;
+  }
+  .hero {
+    padding-block: 64px 68px;
+  }
+  .hero-grid {
+    gap: 40px;
+  }
+  .hero h1 {
+    font-size: clamp(84px, 5.47vw, 105px);
+    max-width: 800px;
+  }
+  .hero .eyebrow {
+    margin-bottom: 32px;
+  }
+  .hero-description {
+    margin-top: 36px;
+  }
+  .hero-actions .btn {
+    min-height: 70px;
+    padding-inline: 32px;
+  }
+  .hero-note {
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .tiny-avatars img {
+    width: 42px;
+    height: 42px;
+  }
+  .hero-art {
+    height: clamp(572px, 37.24vw, 715px);
+  }
+  .hero-main {
+    width: clamp(340px, 22.14vw, 425px);
+    height: clamp(453px, 29.49vw, 566px);
+    left: clamp(65px, 4.24vw, 81px);
+    top: 58px;
+  }
+  .hero-secondary {
+    width: clamp(240px, 15.63vw, 300px);
+    height: clamp(333px, 21.68vw, 416px);
+    right: 4px;
+    top: clamp(170px, 11.07vw, 213px);
+  }
+  .polaroid {
+    padding: 14px 14px 16px;
+    border-radius: 30px;
+  }
+  .polaroid-photo {
+    height: calc(100% - 82px);
+    border-radius: 21px;
+  }
+  .polaroid-caption {
+    padding-top: 16px;
+  }
+  .polaroid-caption strong {
+    font-size: 32px;
+  }
+  .hero-secondary .polaroid-caption strong {
+    font-size: 28px;
+  }
+  .polaroid-caption .circle-button {
+    width: 43px;
+    height: 43px;
+  }
+  .hero-sticker {
+    width: 154px;
+    height: 154px;
+    right: 54px;
+    font-size: 18px;
+  }
+  .hero-orbit {
+    width: clamp(455px, 29.62vw, 569px);
+    height: clamp(455px, 29.62vw, 569px);
+    top: 58px;
+    left: 69px;
+  }
+  .hello-bubble {
+    top: 30px;
+    left: 8px;
+    padding: 13px 19px;
+    font-size: 15px;
+  }
+  .hero-controls {
+    left: 85px;
+    bottom: 20px;
+    gap: 16px;
+  }
+  .hero-controls .circle-button {
+    width: 40px;
+    height: 40px;
+  }
+  .hero-memo {
+    right: 94px;
+    bottom: 16px;
+    font-size: 18px;
+  }
+  .little-star {
+    top: 285px;
+    width: 42px;
+    height: 42px;
+  }
+  .marquee {
+    padding-block: 21px;
+  }
+  .catalog {
+    padding-block: 108px;
+  }
+  .catalog h1,
+  .catalog h2 {
+    font-size: clamp(50px, 3.25vw, 63px);
+  }
+  .match-section,
+  .journey,
+  .stories,
+  .community,
+  .faq {
+    padding-bottom: 108px;
+  }
+  .match-copy {
+    padding: 58px 62px;
+  }
+  .match-copy h2 {
+    font-size: 60px;
+    max-width: 580px;
+  }
+  .match-art {
+    min-height: 440px;
+  }
+  .journey h2 {
+    font-size: 55px;
+  }
+  .steps {
+    gap: 44px;
+  }
+  .step {
+    padding-top: 28px;
+  }
+  .step-top {
+    margin-bottom: 30px;
+  }
+  .story-copy {
+    padding: 56px;
+  }
+  .story-copy h2 {
+    font-size: 58px;
+    max-width: 580px;
+  }
+  .story-shell,
+  .story-image {
+    min-height: 535px;
+  }
+  .community h2 {
+    font-size: 65px;
+  }
+  .help-grid {
+    gap: 28px;
+  }
+  .help-card {
+    padding: 36px;
+  }
+  .faq {
+    gap: 90px;
+  }
+  .faq h2 {
+    font-size: 45px;
+  }
+  .footer {
+    padding-top: 54px;
+  }
+}

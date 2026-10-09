@@ -1,0 +1,20 @@
+---
+interface Props {
+  href: string;
+  icon: string;
+  title: string;
+  description: string;
+}
+const { href, icon, title, description } = Astro.props;
+---
+
+<a class="help-card reveal" href={href}>
+  <svg class="icon" aria-hidden="true">
+    <use href={`#i-${icon}`} />
+  </svg>
+  <svg class="icon help-arrow" aria-hidden="true">
+    <use href="#i-arrow-up" />
+  </svg>
+  <h3>{title}</h3>
+  <p>{description}</p>
+</a>

@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ClearFavorites from '../components/islands/ClearFavorites';
+---
+
+<BaseLayout
+  title="Tus datos y tu privacidad"
+  description="Conocé qué guarda Patitas Lavalleja en tu navegador: favoritos y preferencias. Los formularios de demostración no transmiten ni conservan datos personales."
+>
+  <article class="prose-page wrap">
+    <div class="eyebrow">
+      <span class="dot"></span>Tus datos, con cuidado
+    </div>
+    <h1>
+      Tus historias
+      <br />
+      se quedan contigo.
+    </h1>
+    <p class="prose-lead">Podés explorar Patitas sin crear una cuenta.</p>
+    <h2>Lo que guarda tu navegador</h2>
+    <p>
+      Guardamos localmente los identificadores de tus favoritos y tus
+      preferencias de tema y movimiento. No contienen tu nombre, correo ni datos
+      del hogar. Podés borrarlos desde esta página o desde la configuración de
+      tu navegador.
+    </p>
+    <ClearFavorites client:load />
+    <h2>Formularios y recorrido de afinidad</h2>
+    <p>
+      Los formularios son de demostración. Sus valores solo se usan en la
+      memoria de esta página para mostrar el flujo y la vista previa. No se
+      transmiten ni se guardan en almacenamiento persistente. Al salir de la
+      página se descartan. Las respuestas del recorrido de afinidad también se
+      descartan al salir.
+    </p>
+    <h2>Recursos y registros técnicos</h2>
+    <p>
+      Las fuentes y fotografías se sirven desde este mismo sitio; las fotos
+      ilustrativas provienen de Unsplash. Esta versión no incluye herramientas
+      de analítica, publicidad ni cookies de seguimiento. El servidor que aloje
+      la web puede generar registros técnicos de acceso, como IP, fecha y
+      recurso solicitado, según su configuración.
+    </p>
+    <p>
+      Si elegís compartir una historia, tu navegador puede abrir las
+      aplicaciones disponibles en tu dispositivo. Vos decidís dónde compartir el
+      enlace.
+    </p>
+    <h2>Próximas conexiones</h2>
+    <p>
+      Antes de conectar formularios a un servicio real, esta información deberá
+      actualizarse con la identidad y contacto de los responsables, las
+      finalidades, el tratamiento de datos y las condiciones de ese servicio.
+    </p>
+  </article>
+</BaseLayout>

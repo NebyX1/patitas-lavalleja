@@ -1,0 +1,86 @@
+---
+import { site } from '../../config/site';
+import StructuredData from './StructuredData.astro';
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+  image?: string;
+}
+const {
+  title = 'Tu próxima gran historia tiene patitas',
+  description = site.description,
+  noindex = false,
+  image = site.image,
+} = Astro.props;
+const fullTitle = `${title} · ${site.name}`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const imageUrl = new URL(image, site.url).href;
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${site.url}/#organization`,
+      name: site.name,
+      url: site.url,
+      logo: `${site.url}/favicon.svg`,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      name: site.name,
+      url: site.url,
+      inLanguage: 'es-UY',
+      publisher: { '@id': `${site.url}/#organization` },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': canonical,
+      url: canonical,
+      name: fullTitle,
+      description,
+      inLanguage: 'es-UY',
+      isPartOf: { '@id': `${site.url}/#website` },
+      about: {
+        '@type': 'Thing',
+        name: 'Adopción responsable de perros y gatos en Lavalleja, Uruguay',
+      },
+    },
+  ],
+};
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta
+  name="robots"
+  content={
+    noindex
+      ? 'noindex,follow'
+      : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
+  }
+/>
+<link rel="canonical" href={canonical} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_UY" />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta
+  property="og:image:alt"
+  content="Patitas Lavalleja. Un hogar lo cambia todo."
+/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta
+  name="twitter:image:alt"
+  content="Patitas Lavalleja. Un hogar lo cambia todo."
+/>
+<StructuredData data={schema} />

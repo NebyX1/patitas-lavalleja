@@ -1,0 +1,152 @@
+.journey {
+  padding: 0 0 92px;
+}
+.journey .section-heading {
+  margin-bottom: 37px;
+}
+.journey h2 {
+  font-size: clamp(33px, 3.1vw, 44px);
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 34px;
+  position: relative;
+}
+.step {
+  padding-top: 21px;
+  border-top: 1px solid #cfd4c2;
+  position: relative;
+}
+.step-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.step-num {
+  font: 500 42px/1 var(--display);
+  letter-spacing: -0.07em;
+  color: #a3ac91;
+}
+.step-icon {
+  background: #eceede;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+}
+.step h3 {
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+.step p {
+  max-width: 325px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.stories {
+  padding-bottom: 88px;
+}
+.story-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 32px;
+  overflow: hidden;
+  background: var(--green);
+  color: var(--white);
+  min-height: 428px;
+}
+.story-image {
+  position: relative;
+  min-height: 428px;
+  background: #a7b9a7;
+  overflow: hidden;
+}
+.story-image img {
+  transition: transform 1.4s var(--ease);
+}
+.story-shell:hover .story-image img {
+  transform: scale(1.05);
+}
+.story-image-label {
+  position: absolute;
+  left: 25px;
+  bottom: 22px;
+  background: #fffdf9df;
+  color: var(--ink);
+  border-radius: 100px;
+  padding: 7px 13px;
+  font-size: 10px;
+  backdrop-filter: blur(8px);
+}
+.story-copy {
+  padding: 44px 45px 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.story-copy .eyebrow {
+  color: #dbe3cc;
+  font-size: 9px;
+  margin-bottom: 20px;
+}
+.story-copy .eyebrow .dot {
+  background: var(--lime);
+}
+.story-copy h2 {
+  font-size: clamp(29px, 3.4vw, 47px);
+  line-height: 1.16;
+  max-width: 460px;
+  letter-spacing: -0.055em;
+}
+.story-copy h2 span {
+  color: var(--lime);
+}
+.story-copy p {
+  font-size: 13px;
+  color: #c1cfbd;
+  line-height: 1.85;
+  margin-top: 19px;
+  max-width: 360px;
+}
+.story-end {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 26px;
+}
+.story-end small {
+  font-size: 9px;
+  color: #c6d2c2;
+  letter-spacing: 0.03em;
+}
+.story-nav {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.story-nav .circle-button {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border-color: #70816d;
+  color: var(--white);
+}
+.story-nav .circle-button:hover {
+  background: #465d43;
+}
+.story-nav .icon {
+  width: 15px;
+  height: 15px;
+}
+.story-star {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: var(--lime);
+  width: 25px;
+  height: 25px;
+}

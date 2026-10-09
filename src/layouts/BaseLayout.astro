@@ -1,0 +1,75 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+import ThemeInit from '../components/layout/ThemeInit.astro';
+import SeoHead from '../components/seo/SeoHead.astro';
+import IconSprite from '../components/decorative/IconSprite.astro';
+import Toast from '../components/islands/Toast';
+import '../styles/global.css';
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title, description, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-UY">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#f7f5ef" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <SeoHead {title} {description} {noindex} />
+    <ThemeInit />
+    <ClientRouter fallback="animate" />
+    <slot name="head" />
+  </head>
+  <body>
+    <IconSprite />
+    <a class="skip-link" href="#contenido">
+      Saltar al contenido
+    </a>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <Navbar />
+    <main id="contenido" tabindex="-1" transition:animate="fade">
+      <slot />
+    </main>
+    <Footer />
+    <Toast client:load transition:persist="site-toast" />
+    <noscript>
+      <style>
+        .theme-toggle,
+        .motion-button,
+        .fav-button,
+        .nav-fav,
+        .menu-toggle,
+        .hero-controls,
+        .story-nav,
+        .profile-tabs,
+        .profile-photo-tools,
+        .zoom-button,
+        .demo-form {
+          display: none !important;
+        }
+        .profile-panel[hidden] {
+          display: block !important;
+        }
+      </style>
+      <p class="wrap demo-notice">
+        Podés leer todas las historias sin JavaScript. Para usar favoritos,
+        filtros y los recorridos de prueba, activá JavaScript en tu navegador.
+      </p>
+    </noscript>
+    <script>
+      import '../features/site/lifecycle';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+---
+import { faqs } from '../../data/faqs';
+---
+
+<section class="faq wrap" aria-labelledby="faq-title">
+  <div class="reveal">
+    <div class="eyebrow">
+      <span class="dot"></span> Antes de dar el paso
+    </div>
+    <h2 id="faq-title">
+      Es bueno
+      <br />
+      tener preguntas.
+    </h2>
+    <p>Conocer las necesidades de cada animal es parte del encuentro.</p>
+  </div>
+  <div class="faq-list reveal">
+    {faqs.map(({ question, answer }) => (
+      <details>
+        <summary>
+          {question}
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-plus" />
+          </svg>
+        </summary>
+        <p>{answer}</p>
+      </details>
+    ))}
+  </div>
+</section>

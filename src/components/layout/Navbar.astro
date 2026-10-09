@@ -1,0 +1,42 @@
+---
+import Brand from './Brand.astro';
+import Icon from '../ui/Icon.astro';
+import ThemeToggle from '../islands/ThemeToggle';
+import FavoritesLink from '../islands/FavoritesLink';
+import MobileMenu from '../islands/MobileMenu';
+import { navigation } from '../../config/site';
+const currentPath = Astro.url.pathname;
+---
+
+<div class="topline">
+  <div class="wrap">
+    <span>
+      <Icon name="pin" /> Lavalleja, Uruguay
+    </span>
+    <span class="topline-center">Un encuentro puede cambiarlo todo.</span>
+    <span class="topline-label">Pequeñas patitas. Grandes comienzos.</span>
+  </div>
+</div>
+<header class="header" id="site-header">
+  <nav class="nav wrap" aria-label="Navegación principal">
+    <Brand />
+    <div class="nav-links">
+      {navigation.map((link) => (
+        <a
+          href={link.href}
+          aria-current={link.href === currentPath ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+    <div class="nav-actions">
+      <ThemeToggle client:load />
+      <FavoritesLink client:load />
+      <a class="btn btn-dark btn-small publish-button" href="/publicar/">
+        Dar en adopción <Icon name="plus" class="icon-sm" />
+      </a>
+      <MobileMenu client:load />
+    </div>
+  </nav>
+</header>

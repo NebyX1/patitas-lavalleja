@@ -1,0 +1,22 @@
+---
+interface Props {
+  number: string;
+  icon: string;
+  title: string;
+  description: string;
+}
+const { number, icon, title, description } = Astro.props;
+---
+
+<article class="step reveal">
+  <div class="step-top">
+    <span class="step-num">{number}</span>
+    <span class="step-icon">
+      <svg class="icon" aria-hidden="true">
+        <use href={`#i-${icon}`} />
+      </svg>
+    </span>
+  </div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+</article>

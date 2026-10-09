@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MatchQuiz from '../components/islands/MatchQuiz';
+---
+
+<BaseLayout
+  title="Descubrí quién va con vos"
+  description="Tres preguntas sobre tu ritmo de vida para explorar historias de perros y gatos. Un recorrido de afinidad que orienta tu búsqueda de un compañero."
+>
+  <section class="flow-page wrap">
+    <div class="flow-heading">
+      <div class="eyebrow">
+        <span class="dot"></span>La conexión va mucho más allá de una foto
+      </div>
+      <h1>
+        Tu mundo.
+        <br />
+        Sus patitas.
+      </h1>
+      <p>
+        Un punto de partida para conocerse.
+        <br />
+        Tres preguntas, muchas historias posibles.
+      </p>
+      <a class="text-link" href="/adopcion/">
+        Prefiero explorar todas las historias ↗
+      </a>
+    </div>
+    <MatchQuiz client:load />
+  </section>
+</BaseLayout>

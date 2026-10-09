@@ -1,0 +1,53 @@
+---
+import JourneyStep from '../cards/JourneyStep.astro';
+const steps = [
+  {
+    number: '01',
+    icon: 'search',
+    title: 'Encontrá tu compañero',
+    description:
+      'Explorá las historias, sus costumbres y sus necesidades. Guardá las que te gustaría conocer mejor.',
+  },
+  {
+    number: '02',
+    icon: 'chat',
+    title: 'Conozcan sus mundos',
+    description:
+      'Conversá con quien lo cuida, despejá tus dudas y coordiná un encuentro. Sin apuros, de los dos lados.',
+  },
+  {
+    number: '03',
+    icon: 'home',
+    title: 'Empiecen una nueva historia',
+    description:
+      'Preparen juntos la llegada a casa y una adaptación acompañada. Lo más lindo recién empieza.',
+  },
+];
+---
+
+<section
+  class="journey wrap"
+  id="como-funciona"
+  aria-labelledby="journey-title"
+>
+  <div class="section-heading reveal">
+    <div>
+      <div class="eyebrow">
+        <span class="dot"></span> Con tiempo, con cariño, con información
+      </div>
+      <h2 id="journey-title">
+        Del primer hola
+        <br />
+        al primer paseo.
+      </h2>
+    </div>
+    <p>
+      No es una compra. Es el comienzo de una relación. Y cada paso importa.
+    </p>
+  </div>
+  <div class="steps">
+    {steps.map((step) => (
+      <JourneyStep {...step} />
+    ))}
+  </div>
+</section>
