@@ -284,6 +284,20 @@ a.btn {
 .breadcrumbs a:hover {
   color: var(--orange);
 }
+.profile-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.profile-topbar .breadcrumbs {
+  margin-bottom: 0;
+}
+.profile-back {
+  gap: 10px;
+}
 .profile-page {
   width: 100%;
   box-shadow: none;
@@ -451,6 +465,87 @@ html[data-motion='paused'] .word-story svg {
   object-fit: cover;
   border-radius: 18px;
 }
+[data-tilt] {
+  --lift: 0px;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  isolation: isolate;
+  transform: perspective(900px) translateY(var(--lift))
+    rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+}
+[data-tilt]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    260px circle at var(--mx) var(--my),
+    color-mix(in srgb, var(--lime) 55%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+@media (hover: hover) and (pointer: fine) {
+  [data-tilt]:hover::after {
+    opacity: 1;
+  }
+}
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 460px;
+  height: 460px;
+  margin: -230px 0 0 -230px;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--lime) 36%, transparent),
+    transparent
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.cursor-glow.is-on {
+  opacity: 1;
+}
+.split-word {
+  display: inline-block;
+}
+.motion-ready [data-split] .split-word {
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+  transition-delay: calc(var(--i) * 45ms);
+}
+.motion-ready [data-split]:not(.split-in) .split-word {
+  opacity: 0;
+  transform: translateY(0.45em);
+}
+.fav-button.pop .icon {
+  animation: heart-pop 0.55s var(--ease);
+}
+@keyframes heart-pop {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.35);
+  }
+  70% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 @keyframes panel-in {
   from {
     opacity: 0.15;
@@ -470,7 +565,7 @@ html[data-motion='paused'] *::after {
 }
 html[data-motion='paused'] .reveal.pending {
   opacity: 1;
-  transform: none;
+  translate: none;
 }
 html[data-motion='paused']::view-transition-group(*),
 html[data-motion='paused']::view-transition-old(*),

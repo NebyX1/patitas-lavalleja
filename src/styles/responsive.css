@@ -1239,7 +1239,7 @@
   }
   .motion-ready .reveal.pending {
     opacity: 1;
-    transform: none;
+    translate: none;
   }
 }
 body.motion-paused *,
@@ -1252,5 +1252,5 @@ body.motion-paused *::after {
 }
 .motion-paused .reveal.pending {
   opacity: 1;
-  transform: none;
+  translate: none;
 }

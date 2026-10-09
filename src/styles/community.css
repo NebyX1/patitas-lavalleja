@@ -26,7 +26,6 @@
   background: #eae5f0;
 }
 .help-card:hover {
-  transform: translateY(-6px);
   box-shadow: 0 12px 30px #3d402b09;
 }
 .help-card > .icon {

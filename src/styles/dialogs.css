@@ -309,14 +309,16 @@
 .reveal {
   opacity: 1;
 }
+/* Uses the individual `translate` property so pointer tilt on the same element can use `transform` without being slowed by this transition. */
 .motion-ready .reveal.pending {
   opacity: 0;
-  transform: translateY(25px);
+  translate: 0 25px;
 }
 .motion-ready .reveal {
   transition:
     opacity 0.8s var(--ease),
-    transform 0.8s var(--ease);
+    translate 0.8s var(--ease),
+    box-shadow 0.35s;
 }
 @keyframes draw {
   to {

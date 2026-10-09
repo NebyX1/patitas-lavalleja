@@ -17,8 +17,12 @@ export default function HeroGallery() {
   const change = (direction: number) =>
     setIndex((current) => (current + direction + pairs.length) % pairs.length);
   return (
-    <div className="hero-art" aria-label="Conocé algunas de nuestras patitas">
-      <div className="hero-orbit" aria-hidden="true" />
+    <div
+      className="hero-art"
+      aria-label="Conocé algunas de nuestras patitas"
+      data-depth-scope
+    >
+      <div className="hero-orbit" aria-hidden="true" data-parallax="-0.12" />
       <svg
         className="hero-line"
         viewBox="0 0 180 150"
@@ -34,10 +38,10 @@ export default function HeroGallery() {
         />
       </svg>
       <Icon name="star" className="little-star" />
-      <div className="hello-bubble" aria-live="polite">
+      <div className="hello-bubble" aria-live="polite" data-depth="10">
         Hola, soy {main.name} ♡
       </div>
-      <div className="hero-sticker" aria-hidden="true">
+      <div className="hero-sticker" aria-hidden="true" data-depth="16">
         <Icon name="star" className="sticker-star" />
         <div>
           <Icon name="heart" />
@@ -51,6 +55,7 @@ export default function HeroGallery() {
           key={`${i}-${p.id}`}
           href={petUrl(p.id)}
           className={`polaroid ${i === 0 ? 'hero-main' : 'hero-secondary'}`}
+          data-depth={i === 0 ? 8 : 14}
           aria-label={`Conocer a ${p.name}`}
         >
           <div className="polaroid-photo" data-pet-photo>
@@ -108,7 +113,7 @@ export default function HeroGallery() {
           <Icon name="right" />
         </button>
       </div>
-      <div className="hero-memo" aria-hidden="true">
+      <div className="hero-memo" aria-hidden="true" data-depth="6">
         Tu persona favorita
         <br />
         también puede tener patas.

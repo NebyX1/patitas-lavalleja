@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PetProfile from '../../components/profile/PetProfile.astro';
 import StructuredData from '../../components/seo/StructuredData.astro';
+import Icon from '../../components/ui/Icon.astro';
 import { pets } from '../../data/pets';
 import { petUrl, site } from '../../config/site';
 import type { Pet } from '../../types/pet';
@@ -41,13 +42,19 @@ const { pet } = Astro.props;
     }}
   />
   <div class="wrap profile-container">
-    <nav class="breadcrumbs" aria-label="Ruta de navegación">
-      <a href="/">Inicio</a>
-      <span aria-hidden="true">/</span>
-      <a href="/adopcion/">Todas las patitas</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">{pet.name}</span>
-    </nav>
+    <div class="profile-topbar">
+      <nav class="breadcrumbs" aria-label="Ruta de navegación">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="/adopcion/">Todas las patitas</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{pet.name}</span>
+      </nav>
+      <a class="btn btn-outline btn-small profile-back" href="/adopcion/" data-profile-back>
+        <Icon name="left" class="icon-sm" />
+        Volver a la búsqueda
+      </a>
+    </div>
     <PetProfile {pet} />
   </div>
 </BaseLayout>

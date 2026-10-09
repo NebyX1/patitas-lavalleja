@@ -8,7 +8,7 @@ interface Props {
 const { href, icon, title, description } = Astro.props;
 ---
 
-<a class="help-card reveal" href={href}>
+<a class="help-card reveal" href={href} data-tilt>
   <svg class="icon" aria-hidden="true">
     <use href={`#i-${icon}`} />
   </svg>
