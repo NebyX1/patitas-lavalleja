@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AccountPanel from '../components/islands/AccountPanel';
+import '../styles/management.css';
+---
+
+<BaseLayout
+  title="Mi cuenta"
+  description="Tu perfil, tus favoritos y el recorrido de tus solicitudes en Patitas Lavalleja."
+  noindex
+>
+  <div class="wrap management-page profile-page-shell">
+    <AccountPanel client:load />
+  </div>
+</BaseLayout>

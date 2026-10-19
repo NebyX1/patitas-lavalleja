@@ -5,9 +5,11 @@ import { useClientState } from '../../features/preferences/useClientState';
 export default function PhotoLightbox({
   id,
   alt,
+  src,
 }: {
   id: string;
   alt: string;
+  src?: string;
 }) {
   const ready = useClientState();
   const dialog = useRef<HTMLDialogElement>(null);
@@ -36,7 +38,7 @@ export default function PhotoLightbox({
       <dialog
         ref={dialog}
         className="lightbox-dialog"
-        aria-label="Fotografía ilustrativa ampliada"
+        aria-label="Fotografía ampliada"
         onClick={(event) => {
           if (event.target === dialog.current) {
             const rect = dialog.current.getBoundingClientRect();
@@ -58,7 +60,7 @@ export default function PhotoLightbox({
           <Icon name="close" />
         </button>
         <img
-          src={petPhoto(id)}
+          src={src ?? petPhoto(id)}
           alt={alt}
           width="960"
           height="960"

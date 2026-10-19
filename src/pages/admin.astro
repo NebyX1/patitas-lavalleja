@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AdminPanel from '../components/islands/AdminPanel';
+import '../styles/management.css';
+---
+
+<BaseLayout
+  title="Gestión de Patitas"
+  description="Publicaciones, organizaciones y solicitudes acompañadas por el equipo responsable."
+  noindex
+>
+  <div class="wrap management-page">
+    <div class="flow-heading">
+      <span class="eyebrow">
+        <span class="dot"></span>Con información y con cuidado
+      </span>
+      <h1>
+        Cuidar las historias.
+        <br />
+        Acompañar los encuentros.
+      </h1>
+    </div>
+    <AdminPanel client:load />
+  </div>
+</BaseLayout>

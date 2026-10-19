@@ -1,0 +1,44 @@
+.testing-login {
+  padding: clamp(18px, 2vw, 28px);
+  margin-block: 0 28px;
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, var(--lime));
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--lime) 13%, var(--paper));
+  min-width: 0;
+}
+.testing-badge {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.testing-login select {
+  width: 100%;
+  max-width: 100%;
+  min-height: 50px;
+  font: inherit;
+  font-size: 16px;
+  padding: 12px 32px 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--ink);
+  text-overflow: ellipsis;
+}
+.testing-login .form-field {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.testing-login select:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+.testing-login .testing-description {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}

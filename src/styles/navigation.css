@@ -39,7 +39,7 @@
     box-shadow 0.3s;
 }
 .header.scrolled {
-  background: #f7f5efed;
+  background: var(--paper);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-color: #deded282;

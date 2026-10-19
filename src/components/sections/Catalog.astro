@@ -1,11 +1,24 @@
 ---
 import PetCatalog from '../islands/PetCatalog';
+import { serverPets } from '../../lib/server';
 interface Props {
   favoritesOnly?: boolean;
   standalone?: boolean;
 }
 const { favoritesOnly = false, standalone = false } = Astro.props;
 const Heading = standalone ? 'h1' : 'h2';
+let initialPage = null;
+let initialError = '';
+if (!favoritesOnly && !Astro.isPrerendered) {
+  try {
+    initialPage = await serverPets('page=1&page_size=12');
+  } catch (error) {
+    initialError =
+      error instanceof Error
+        ? error.message
+        : 'No pudimos consultar el catálogo.';
+  }
+}
 ---
 
 <section class="catalog wrap" id="adopcion" aria-labelledby="catalog-title">
@@ -31,7 +44,7 @@ const Heading = standalone ? 'h1' : 'h2';
     </div>
     <p>
       {favoritesOnly ? (
-        'Guardadas en tu navegador, para volver a encontrarlas.'
+        'Guardadas en tu cuenta o en este navegador, para volver a encontrarlas.'
       ) : (
         <>
           Cada patita tiene su manera de querer.
@@ -41,7 +54,12 @@ const Heading = standalone ? 'h1' : 'h2';
       )}
     </p>
   </div>
-  <PetCatalog favoritesOnly={favoritesOnly} client:load />
+  <PetCatalog
+    favoritesOnly={favoritesOnly}
+    {initialPage}
+    {initialError}
+    client:load
+  />
   <noscript>
     <p class="demo-notice">
       Podés abrir todas las fichas sin JavaScript. Los filtros y favoritos

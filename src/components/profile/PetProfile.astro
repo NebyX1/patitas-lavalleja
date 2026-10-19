@@ -1,45 +1,62 @@
 ---
 import type { Pet } from '../../types/pet';
-import { petPhoto } from '../../config/site';
+import { photoFor, adoptionLabel } from '../../config/site';
 import Icon from '../ui/Icon.astro';
 import FavoriteButton from '../islands/FavoriteButton';
 import ProfileTabs from '../islands/ProfileTabs';
 import ShareButton from '../islands/ShareButton';
 import PhotoLightbox from '../islands/PhotoLightbox';
+import PetCompatibility from '../islands/PetCompatibility';
 interface Props {
   pet: Pet;
 }
 const { pet: p } = Astro.props;
+const photo = photoFor(p);
+const hasPhoto = photo !== '/images/pet-placeholder.svg';
 ---
 
 <div class="profile-shell profile-page">
   <div class="profile-visual">
     <div class="profile-main-photo" style={`--pos:${p.pos}`}>
       <img
-        src={petPhoto(p.id)}
+        src={photo}
         width="960"
         height="960"
-        alt={p.alt}
+        alt={hasPhoto ? p.alt : `Fotografía pendiente de ${p.name}`}
         fetchpriority="high"
         transition:name="pet-photo"
       />
+      <div class="profile-visual-tag">
+        <Icon name="paw" class="icon-sm" />
+        {p.is_demo ? 'Perfil ficticio de demostración' : adoptionLabel(p)}
+      </div>
+      {hasPhoto && (
+        <PhotoLightbox
+          id={p.id}
+          src={photoFor(p, 1600)}
+          alt={p.alt}
+          client:idle
+        />
+      )}
     </div>
-    <div class="profile-visual-tag">
-      <Icon name="paw" class="icon-sm" />
-      Una familia por imaginar
-    </div>
-    <PhotoLightbox id={p.id} alt={p.alt} client:idle />
     <div class="profile-photo-label">
       <span>
         <Icon name="pin" />
-        {p.location}, Lavalleja
+        {p.location}, {p.department ?? 'Lavalleja'}
       </span>
-      <small>Fotografía ilustrativa</small>
+      <small>
+        {!hasPhoto
+          ? 'Fotografía pendiente'
+          : p.is_demo
+            ? 'Fotografía ilustrativa'
+            : 'Fotografía del perfil'}
+      </small>
     </div>
   </div>
   <div class="profile-info">
     <div class="eyebrow">
-      <span class="dot"></span>Perfil de demostración
+      <span class="dot"></span>
+      {p.is_demo ? 'Perfil de demostración' : adoptionLabel(p)}
     </div>
     <div class="profile-title-row">
       <h1>{p.name}</h1>
@@ -69,23 +86,29 @@ const { pet: p } = Astro.props;
         <dd>{p.sex}</dd>
       </div>
     </dl>
+    <PetCompatibility petId={p.id} name={p.name} client:load />
     <ProfileTabs pet={p} client:load />
     <div class="profile-caretaker">
       <span class="caretaker-icon">
         <Icon name="shield" />
       </span>
       <div>
-        <b>Un encuentro acompañado</b>
+        <b>{p.organization?.name ?? 'Un encuentro acompañado'}</b>
         <small>Las necesidades se conversan con el equipo a cargo.</small>
       </div>
     </div>
-    <a class="btn btn-orange profile-cta" href={`/solicitud/${p.id}/`}>
-      Quiero conocer a {p.name}
-      <Icon name="arrow-up" class="icon-sm" />
-    </a>
+    {(!p.adoption_status || p.adoption_status === 'available') &&
+      !p.is_demo && (
+        <a class="btn btn-orange profile-cta" href={`/solicitud/${p.id}/`}>
+          Quiero conocer a {p.name}
+          <Icon name="arrow-up" class="icon-sm" />
+        </a>
+      )}
     <p class="profile-disclaimer">
-      Recorrido de ejemplo. No reserva ni envía una solicitud real.
+      {p.is_demo
+        ? 'Este animal es ficticio. No se reciben solicitudes sobre perfiles de prueba.'
+        : 'La solicitud se revisa personalmente. No reserva una mascota ni garantiza una adopción.'}
     </p>
-    <ShareButton id={p.id} name={p.name} client:idle />
+    <ShareButton id={p.id} name={p.name} isDemo={p.is_demo} client:idle />
   </div>
 </div>

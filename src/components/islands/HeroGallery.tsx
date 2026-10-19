@@ -1,21 +1,66 @@
 import { useState } from 'react';
-import { pets } from '../../data/pets';
-import { petPhoto, petUrl } from '../../config/site';
+import { photoFor, petUrl } from '../../config/site';
+import type { Pet } from '../../types/pet';
 import Icon from '../ui/Icon';
 import { useClientState } from '../../features/preferences/useClientState';
-const pairs = [
-  ['milo', 'mora'],
-  ['luna', 'olivia'],
-  ['coco', 'pipa'],
-];
-export default function HeroGallery() {
+export default function HeroGallery({ pets = [] }: { pets?: Pet[] }) {
   const ready = useClientState();
   const [index, setIndex] = useState(0);
-  const [main, secondary] = pairs[index].map((id) =>
-    pets.find((p) => p.id === id)!,
+  const pairs = Array.from(
+    { length: Math.ceil(pets.length / 2) },
+    (_, pair) => [pets[pair * 2], pets[pair * 2 + 1] ?? pets[pair * 2]],
   );
+  const [main, secondary] = pairs[index] ?? [];
   const change = (direction: number) =>
     setIndex((current) => (current + direction + pairs.length) % pairs.length);
+  if (!main)
+    return (
+      <div
+        className="hero-art"
+        aria-label="Fotografías ilustrativas sobre adopción responsable"
+      >
+        <div className="hero-orbit" aria-hidden="true" />
+        <div className="polaroid hero-main">
+          <div className="polaroid-photo">
+            <img
+              src="/images/pets/milo-960.webp"
+              alt="Fotografía ilustrativa de un perro"
+              width="960"
+              height="960"
+            />
+            <span className="photo-caption-pill">Imagen ilustrativa</span>
+          </div>
+          <div className="polaroid-caption">
+            <div>
+              <strong>Un encuentro.</strong>
+              <span>Una historia por escribir.</span>
+            </div>
+            <Icon name="heart" />
+          </div>
+        </div>
+        <div className="polaroid hero-secondary">
+          <div className="polaroid-photo">
+            <img
+              src="/images/pets/mora-960.webp"
+              alt="Fotografía ilustrativa de un gato"
+              width="960"
+              height="960"
+            />
+          </div>
+          <div className="polaroid-caption">
+            <div>
+              <strong>Un hogar.</strong>
+              <span>Todo puede cambiar.</span>
+            </div>
+          </div>
+        </div>
+        <div className="hero-memo">
+          Explorá las historias
+          <br />
+          publicadas en el catálogo.
+        </div>
+      </div>
+    );
   return (
     <div
       className="hero-art"
@@ -60,8 +105,8 @@ export default function HeroGallery() {
         >
           <div className="polaroid-photo" data-pet-photo>
             <img
-              src={petPhoto(p.id)}
-              srcSet={`${petPhoto(p.id, 480)} 480w, ${petPhoto(p.id)} 960w`}
+              src={photoFor(p)}
+              srcSet={`${photoFor(p, 480)} 480w, ${photoFor(p)} 960w`}
               sizes={i === 0 ? '320px' : '230px'}
               alt={p.alt}
               width="960"
@@ -72,7 +117,9 @@ export default function HeroGallery() {
             {i === 0 && (
               <span className="photo-caption-pill">
                 <span className="dot" />
-                Una historia por descubrir
+                {p.is_demo
+                  ? 'Perfil ficticio de demostración'
+                  : 'Una historia por descubrir'}
               </span>
             )}
           </div>
@@ -98,7 +145,9 @@ export default function HeroGallery() {
         >
           <Icon name="left" />
         </button>
-        <small>0{index + 1} / 03</small>
+        <small>
+          0{index + 1} / 0{pairs.length}
+        </small>
         <div className="hero-dots" aria-hidden="true">
           {pairs.map((_, i) => (
             <i key={i} className={i === index ? 'active' : ''} />

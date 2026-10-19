@@ -2,6 +2,10 @@ import { useRef, useState } from 'react';
 import type { Pet } from '../../types/pet';
 import Icon from '../ui/Icon';
 import { useClientState } from '../../features/preferences/useClientState';
+import {
+  categoryLabels,
+  compatibilityLabels,
+} from '../../features/catalog/api';
 const tabs = [
   ['story', 'Mi historia'],
   ['personality', 'Así soy'],
@@ -73,25 +77,62 @@ export default function ProfileTabs({ pet: p }: { pet: Pet }) {
         hidden={selected !== 1}
       >
         <div className="compat-list">
-          {[
-            ['dog', 'Con otros perros', p.dogs],
-            ['cat', 'Con otros gatos', p.cats],
-            ['people', 'Con niños', p.children],
-          ].map(([icon, label, value]) => (
-            <div key={label} className="compat-item">
-              <span>
-                <Icon name={icon} />
-                {label}
-              </span>
-              <b>{value}</b>
-            </div>
-          ))}
+          {!!p.compatibilities?.length &&
+            p.compatibilities.map((item) => (
+              <div
+                key={item.category}
+                className="compat-item compatibility-observation"
+              >
+                <span>{categoryLabels[item.category] ?? item.category}</span>
+                <b>
+                  {compatibilityLabels[item.status] ??
+                    'Pendiente de evaluación'}
+                </b>
+                {item.observation && <p>{item.observation}</p>}
+                {(item.recommendations || item.recommendation) && (
+                  <small>{item.recommendations || item.recommendation}</small>
+                )}
+                {item.evaluated_at && (
+                  <small>
+                    Observación registrada:{' '}
+                    {new Date(item.evaluated_at).toLocaleDateString('es-UY')}
+                  </small>
+                )}
+              </div>
+            ))}
+          {!p.compatibilities?.length && (
+            <p className="care-note">
+              La convivencia todavía no fue evaluada. Consultá al equipo
+              responsable.
+            </p>
+          )}
+          {p.is_demo &&
+            [
+              ['dog', 'Con otros perros', p.dogs],
+              ['cat', 'Con otros gatos', p.cats],
+              ['people', 'Con niños', p.children],
+            ].map(([icon, label, value]) => (
+              <div key={label} className="compat-item">
+                <span>
+                  <Icon name={icon} />
+                  {label}
+                </span>
+                <b>{value}</b>
+              </div>
+            ))}
         </div>
         <div className="energy">
-          <span>Mi energía · {p.energy}/5</span>
+          <span>
+            {p.energy === null
+              ? 'Mi energía · pendiente de evaluar'
+              : `Mi energía · ${p.energy}/5`}
+          </span>
           <span className="energy-bars" aria-hidden="true">
             {Array.from({ length: 5 }, (_, i) => (
-              <i key={i} className={i < p.energy ? 'on' : ''} />
+              <i
+                key={i}
+                className={p.energy !== null && i < p.energy ? 'on' : ''}
+              />
             ))}
           </span>
         </div>
@@ -118,8 +159,8 @@ export default function ProfileTabs({ pet: p }: { pet: Pet }) {
           ))}
         </div>
         <p className="care-note">
-          Datos de demostración. Los antecedentes y cuidados deben confirmarse
-          con sus responsables.
+          {p.is_demo ? 'Datos ficticios de demostración. ' : ''}Los antecedentes
+          y cuidados deben confirmarse con sus responsables.
         </p>
       </div>
     </>

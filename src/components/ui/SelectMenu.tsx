@@ -26,6 +26,8 @@ interface Props<T extends string> {
   className?: string;
   name?: string;
   required?: boolean;
+  multiple?: boolean;
+  maxSelections?: number;
 }
 
 export default function SelectMenu<T extends string>({
@@ -40,6 +42,8 @@ export default function SelectMenu<T extends string>({
   className = '',
   name,
   required = false,
+  multiple = false,
+  maxSelections = 12,
 }: Props<T>) {
   const generatedId = useId();
   const id = idProp ?? generatedId;
@@ -47,9 +51,12 @@ export default function SelectMenu<T extends string>({
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const items = useRef<(HTMLLIElement | null)[]>([]);
+  const selectedValues = multiple && value !== 'all' ? value.split(',') : [];
   const selected = Math.max(
     0,
-    options.findIndex((option) => option.value === value),
+    options.findIndex((option) =>
+      multiple ? selectedValues.includes(option.value) : option.value === value,
+    ),
   );
 
   useEffect(() => {
@@ -59,11 +66,21 @@ export default function SelectMenu<T extends string>({
       if (!root.current?.contains(event.target as Node)) setOpen(false);
     };
     document.addEventListener('pointerdown', closeOnOutsidePress);
-    return () => document.removeEventListener('pointerdown', closeOnOutsidePress);
+    return () =>
+      document.removeEventListener('pointerdown', closeOnOutsidePress);
   }, [open, selected]);
 
   const choose = (next: T) => {
-    onChange(next);
+    if (multiple) {
+      if (next === 'all') onChange('all' as T);
+      else if (selectedValues.includes(next))
+        onChange(
+          (selectedValues.filter((item) => item !== next).join(',') ||
+            'all') as T,
+        );
+      else if (selectedValues.length < maxSelections)
+        onChange([...selectedValues, next].join(',') as T);
+    } else onChange(next);
     setOpen(false);
     trigger.current?.focus();
   };
@@ -133,12 +150,19 @@ export default function SelectMenu<T extends string>({
         {icon && <Icon name={icon} className="select-icon" />}
         <span
           id={`${id}-label`}
-          className={variant === 'field' ? 'select-caption' : 'select-caption sr-only'}
+          className={
+            variant === 'field' ? 'select-caption' : 'select-caption sr-only'
+          }
         >
           {label}
         </span>
         <span id={`${id}-value`} className="select-value">
-          {current?.label}
+          {multiple
+            ? options
+                .filter((option) => selectedValues.includes(option.value))
+                .map((option) => option.label)
+                .join(', ') || options[0]?.label
+            : current?.label}
         </span>
         <Icon name="down" className="select-chevron" />
       </button>
@@ -146,10 +170,20 @@ export default function SelectMenu<T extends string>({
         id={listId}
         role="listbox"
         aria-labelledby={`${id}-label`}
+        aria-multiselectable={multiple || undefined}
         className="select-list"
       >
         {options.map((option, i) => {
-          const isSelected = option.value === value;
+          const isSelected = multiple
+            ? option.value === 'all'
+              ? !selectedValues.length
+              : selectedValues.includes(option.value)
+            : option.value === value;
+          const unavailable =
+            multiple &&
+            option.value !== 'all' &&
+            !isSelected &&
+            selectedValues.length >= maxSelections;
           return (
             <li
               key={option.value}
@@ -158,12 +192,18 @@ export default function SelectMenu<T extends string>({
               }}
               role="option"
               aria-selected={isSelected}
+              aria-disabled={unavailable || undefined}
               tabIndex={-1}
               className="select-option"
               style={{ '--i': i } as CSSProperties}
-              onClick={() => choose(option.value)}
+              onClick={() => {
+                if (!unavailable) choose(option.value);
+              }}
               onKeyDown={(event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
+                if (
+                  !unavailable &&
+                  (event.key === 'Enter' || event.key === ' ')
+                ) {
                   event.preventDefault();
                   choose(option.value);
                 }
@@ -181,7 +221,8 @@ export default function SelectMenu<T extends string>({
           className="sr-only"
           name={name}
           required={required}
-          value={value}
+          multiple={multiple}
+          value={multiple ? selectedValues : value}
           onChange={() => {}}
           onFocus={() => trigger.current?.focus()}
           tabIndex={-1}

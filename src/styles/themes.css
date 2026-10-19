@@ -28,7 +28,7 @@ html[data-theme='dark'] .brand-mark {
   box-shadow: 0 0 25px #c2ff6226;
 }
 html[data-theme='dark'] .header.scrolled {
-  background: #101218ed;
+  background: var(--paper);
   border-color: #c2ff6215;
   box-shadow: 0 10px 35px #0003;
 }

@@ -6,9 +6,11 @@ import { useClientState } from '../../features/preferences/useClientState';
 export default function ShareButton({
   id,
   name,
+  isDemo = false,
 }: {
   id: string;
   name: string;
+  isDemo?: boolean;
 }) {
   const ready = useClientState();
   const [fallback, setFallback] = useState(false);
@@ -18,7 +20,7 @@ export default function ShareButton({
       if (navigator.share) {
         await navigator.share({
           title: `Conocé a ${name} · Patitas Lavalleja`,
-          text: 'Perfil de demostración. Un hogar lo cambia todo.',
+          text: isDemo ? 'Perfil ficticio de demostración.' : 'Conocé su historia y sus necesidades. Un hogar lo cambia todo.',
           url,
         });
         return;

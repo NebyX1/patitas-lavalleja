@@ -137,8 +137,14 @@ a.btn {
   align-items: start;
 }
 .flow-heading {
-  position: sticky;
-  top: 145px;
+  position: static;
+  min-width: 0;
+}
+@media (min-width: 761px) and (min-height: 700px) {
+  .flow-page > .flow-heading {
+    position: sticky;
+    top: 145px;
+  }
 }
 .flow-heading .eyebrow {
   margin-bottom: 22px;
@@ -315,30 +321,37 @@ a.btn {
   padding: 36px clamp(24px, 3.5vw, 48px);
 }
 .profile-page .profile-panel p {
-  font-size: 14px;
+  font-size: var(--pet-copy);
 }
 .profile-page .profile-tab {
-  font-size: 13px;
-  min-height: 44px;
+  font-size: var(--pet-control);
+  min-height: 48px;
   padding-top: 8px;
 }
 .profile-page .profile-visual {
-  min-height: 690px;
+  align-self: start;
+  min-height: 0;
 }
 .profile-page .profile-main-photo {
-  min-height: 520px;
+  flex: none;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+}
+.profile-page .profile-main-photo > img {
+  position: absolute;
+  inset: 0;
 }
 .profile-page .profile-info > .eyebrow {
-  font-size: 10px;
+  font-size: var(--pet-meta);
 }
 .profile-page .profile-caretaker b {
-  font-size: 12px;
+  font-size: var(--pet-control);
 }
 .profile-page .profile-caretaker small {
-  font-size: 10px;
+  font-size: var(--pet-meta);
 }
 .profile-page .profile-disclaimer {
-  font-size: 10px;
+  font-size: var(--pet-meta);
 }
 .profile-page a.profile-cta {
   width: 100%;
@@ -350,19 +363,21 @@ a.btn {
   text-align: center;
 }
 .share-profile .text-link {
-  font-size: 12px;
+  font-size: var(--pet-control);
+  white-space: normal;
+  line-height: 1.5;
 }
 .share-profile .form-field {
   text-align: left;
 }
-.profile-page .care-note {
-  font-size: 11px !important;
+.profile-page .profile-panel .care-note {
+  font-size: var(--pet-meta);
   margin-top: 16px;
 }
 .zoom-button {
   position: absolute;
-  bottom: 66px;
-  right: 30px;
+  bottom: 16px;
+  right: 16px;
   z-index: 3;
   background: var(--white);
 }
@@ -473,8 +488,8 @@ html[data-motion='paused'] .word-story svg {
   --mx: 50%;
   --my: 50%;
   isolation: isolate;
-  transform: perspective(900px) translateY(var(--lift))
-    rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transform: perspective(900px) translateY(var(--lift)) rotateX(var(--tilt-x))
+    rotateY(var(--tilt-y));
 }
 [data-tilt]::after {
   content: '';

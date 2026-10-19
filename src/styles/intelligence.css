@@ -1,0 +1,222 @@
+.advanced-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 20px;
+}
+.filter-context {
+  grid-column: 1/-1;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-block: 18px;
+}
+.catalog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding-top: 36px;
+  font-size: 15px;
+}
+.sample-label {
+  display: inline-block;
+  font-size: 12px;
+  padding-top: 10px;
+  color: var(--muted);
+}
+.api-notice {
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--lime) 14%, var(--paper));
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-block: 20px;
+}
+.compatibility-observation {
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.compatibility-observation p,
+.compatibility-observation small {
+  flex-basis: 100%;
+  line-height: 1.7;
+}
+.compatibility-observation small {
+  font-size: var(--pet-meta);
+  color: var(--muted);
+}
+.quiz-page h3 {
+  font-size: 20px;
+  margin-block: 28px 16px;
+}
+.quiz-fields {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.quiz-page .form-grid {
+  margin-block: 24px;
+}
+.quiz-page .form-checkbox {
+  margin-top: 20px;
+}
+.quiz-page .quiz-option small:empty {
+  display: none;
+}
+.match-result {
+  margin-block: 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.match-result .quiz-result-card {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+.quiz-result-card > span {
+  min-width: 0;
+  flex: 1;
+}
+.quiz-result-card :is(h3, p) {
+  overflow-wrap: anywhere;
+}
+.quiz-navigation {
+  flex-wrap: wrap;
+  align-items: center;
+}
+.quiz-navigation > * {
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal;
+}
+.match-explanation {
+  padding: 0 24px 24px;
+  font-size: 15px;
+  line-height: 1.75;
+}
+.match-explanation h4 {
+  margin: 20px 0 6px;
+  font-size: 16px;
+}
+.match-explanation ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+.match-dimensions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding-block: 18px;
+  border-block: 1px solid var(--line);
+  margin-block: 18px;
+}
+.match-dimensions dt {
+  font-size: 13px;
+  color: var(--muted);
+}
+.match-dimensions dd {
+  font-weight: 700;
+  margin-top: 4px;
+}
+.form-field select {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+.demo-form .full {
+  grid-column: 1/-1;
+  line-height: 1.7;
+}
+.flow-page > *,
+.interactive-panel,
+.demo-form,
+.demo-fields,
+.demo-form .form-grid {
+  min-width: 0;
+  max-width: 100%;
+}
+.demo-form .btn {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  height: auto;
+  min-height: 54px;
+  padding-block: 16px;
+  text-align: center;
+}
+.demo-form .btn .icon {
+  flex: none;
+}
+.form-checkbox span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.flow-heading h1,
+.profile-title-row h1,
+.pet-name-row h3,
+.request-pet strong {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.request-pet > span {
+  min-width: 0;
+}
+.select-option > span {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.select-option[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.form-field input[type='file'] {
+  max-width: 100%;
+  font-size: 14px;
+}
+@media (max-width: 767px) {
+  .advanced-filters {
+    grid-template-columns: 1fr;
+  }
+  .catalog-pagination {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .match-explanation {
+    padding-inline: 18px;
+  }
+  .match-dimensions {
+    grid-template-columns: 1fr;
+  }
+  .quiz-page .quiz-option {
+    min-height: 76px;
+  }
+}
+.saved-match-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+  align-items: center;
+}
+.saved-match-actions .btn {
+  white-space: normal;
+  text-align: left;
+}

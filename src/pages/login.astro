@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LoginPanel from '../components/islands/LoginPanel';
+import '../styles/management.css';
+---
+
+<BaseLayout
+  title="Iniciar sesión"
+  description="Ingresá a tu cuenta de Patitas Lavalleja para guardar tu perfil y descubrir afinidades."
+  noindex
+>
+  <div class="wrap management-page">
+    <LoginPanel client:load />
+  </div>
+</BaseLayout>

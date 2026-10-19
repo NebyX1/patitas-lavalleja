@@ -1,5 +1,15 @@
 ---
 import HeroGallery from '../islands/HeroGallery';
+import { serverPets } from '../../lib/server';
+import type { Pet } from '../../types/pet';
+let pets: Pet[] = [];
+if (!Astro.isPrerendered) {
+  try {
+    pets = (await serverPets('page=1&page_size=6')).items;
+  } catch {
+    /* El catálogo muestra el error real. */
+  }
+}
 ---
 
 <section class="hero wrap" aria-labelledby="hero-title">
@@ -71,7 +81,7 @@ import HeroGallery from '../islands/HeroGallery';
         </div>
       </div>
     </div>
-    <HeroGallery client:load />
+    <HeroGallery {pets} client:load />
   </div>
   <div class="hero-bottom">
     <a class="scroll-cue" href="/adopcion/">

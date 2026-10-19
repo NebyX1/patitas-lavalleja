@@ -1,0 +1,234 @@
+{
+  "measured_at_utc": "2026-10-18T08:36:30.181586+00:00",
+  "hardware": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "physical_cores": 6,
+    "logical_cpus": 12,
+    "total_ram_bytes": 17041395712,
+    "avx2": true
+  },
+  "configuration": {
+    "threads": 2,
+    "backend": "openvino",
+    "repetitions": 5,
+    "rerank_pool_size": 12,
+    "corpus": "synthetic profiles, 12 repeated semantic templates with real Bekko embeddings",
+    "cache": "query embedding warm cache for end-to-end repeated searches; microbenchmark disables query cache",
+    "warning": "Local development host measurements; not Antel VPS measurements."
+  },
+  "rules_version": "2026-10-18.1",
+  "source_sha256": {
+    "scripts\\benchmark_cpu.py": "371123cf56412a8eb2d24df04c2d78528906185e86af4c82d16d6189c55fd9f0",
+    "app\\ai\\__init__.py": "2e396999283f20921ee087cecf6cc45a5beebde868bcadd7704eb067ee9dbddb",
+    "app\\ai\\models.py": "defb360a64161479dadbeba58c17b8e3cb2de3e7550df794526d50bb87d81df8",
+    "app\\ai\\search.py": "b74140fa41a331b0e298c76b563f1e7578a59966b808d6a2be261da2705a3d3e",
+    "app\\ai\\store.py": "cc7e222dc13c077a765a490789fedd580697b934977a1047e0eef89d6159623d",
+    "app\\ai\\text.py": "970018219bb3c44aa1fb24d8e463041602f326271a06172eca5d205e7ed59f3c",
+    "app\\domain\\matching\\__init__.py": "cb09a2257c2bb6d3de7ea1ae42119abac84890cfa0789057ce6cf7ad9ab3384e",
+    "app\\domain\\matching\\engine.py": "4f31df966c2b5d7a107fd6a476e1697c62b970120025d4471547f7446e9329ef",
+    "app\\domain\\matching\\fuzzy.py": "9d1b1c6f9eb5f57d8d35eebf273dd6ac704dcf7a1f81d08c4020a369aca3629b",
+    "app\\domain\\matching\\rules.py": "b6a1bf287c95bd4076446be62621a0d0cca7c3ac28282bac49bd264e46071767"
+  },
+  "experiments": [
+    {
+      "profiles": 100,
+      "lance_upsert_ms": 28.717,
+      "exact_vector_and_bm25": {
+        "count": 5,
+        "p50_ms": 10.024,
+        "p95_ms": 26.409,
+        "min_ms": 9.783,
+        "max_ms": 30.137
+      },
+      "matching": {
+        "rerank_off": {
+          "count": 5,
+          "p50_ms": 17.855,
+          "p95_ms": 18.753,
+          "min_ms": 17.233,
+          "max_ms": 18.947,
+          "degraded": false,
+          "components": {
+            "structured": "ready",
+            "embedding": "ready",
+            "reranker": "disabled",
+            "vector": "ready",
+            "lexical": "lance_bm25_spanish+sqlite_new_profiles"
+          },
+          "results": 12,
+          "excluded": {
+            "blocked": 59,
+            "unavailable": 0
+          }
+        },
+        "rerank_on": {
+          "count": 5,
+          "p50_ms": 878.678,
+          "p95_ms": 986.508,
+          "min_ms": 817.387,
+          "max_ms": 1001.605,
+          "degraded": false,
+          "components": {
+            "structured": "ready",
+            "embedding": "ready",
+            "reranker": "ready",
+            "vector": "ready",
+            "lexical": "lance_bm25_spanish+sqlite_new_profiles"
+          },
+          "results": 12,
+          "excluded": {
+            "blocked": 59,
+            "unavailable": 0
+          }
+        }
+      }
+    },
+    {
+      "profiles": 1000,
+      "lance_upsert_ms": 88.929,
+      "exact_vector_and_bm25": {
+        "count": 5,
+        "p50_ms": 22.356,
+        "p95_ms": 35.452,
+        "min_ms": 21.57,
+        "max_ms": 38.667
+      },
+      "matching": {
+        "rerank_off": {
+          "count": 5,
+          "p50_ms": 83.865,
+          "p95_ms": 110.369,
+          "min_ms": 81.26,
+          "max_ms": 116.687,
+          "degraded": false,
+          "components": {
+            "structured": "ready",
+            "embedding": "ready",
+            "reranker": "disabled",
+            "vector": "ready",
+            "lexical": "lance_bm25_spanish+sqlite_new_profiles"
+          },
+          "results": 12,
+          "excluded": {
+            "blocked": 584,
+            "unavailable": 0
+          }
+        },
+        "rerank_on": {
+          "count": 5,
+          "p50_ms": 976.882,
+          "p95_ms": 1026.675,
+          "min_ms": 896.223,
+          "max_ms": 1032.926,
+          "degraded": false,
+          "components": {
+            "structured": "ready",
+            "embedding": "ready",
+            "reranker": "ready",
+            "vector": "ready",
+            "lexical": "lance_bm25_spanish+sqlite_new_profiles"
+          },
+          "results": 12,
+          "excluded": {
+            "blocked": 584,
+            "unavailable": 0
+          }
+        }
+      }
+    },
+    {
+      "profiles": 10000,
+      "lance_upsert_ms": 814.199,
+      "exact_vector_and_bm25": {
+        "count": 5,
+        "p50_ms": 42.878,
+        "p95_ms": 51.543,
+        "min_ms": 42.308,
+        "max_ms": 53.55
+      },
+      "matching": {
+        "rerank_off": {
+          "count": 5,
+          "p50_ms": 896.11,
+          "p95_ms": 955.008,
+          "min_ms": 839.284,
+          "max_ms": 965.125,
+          "degraded": false,
+          "components": {
+            "structured": "ready",
+            "embedding": "ready",
+            "reranker": "disabled",
+            "vector": "ready",
+            "lexical": "lance_bm25_spanish+sqlite_new_profiles"
+          },
+          "results": 12,
+          "excluded": {
+            "blocked": 5834,
+            "unavailable": 0
+          }
+        },
+        "rerank_on": {
+          "count": 5,
+          "p50_ms": 1762.597,
+          "p95_ms": 1797.239,
+          "min_ms": 1614.705,
+          "max_ms": 1799.339,
+          "degraded": false,
+          "components": {
+            "structured": "ready",
+            "embedding": "ready",
+            "reranker": "ready",
+            "vector": "ready",
+            "lexical": "lance_bm25_spanish+sqlite_new_profiles"
+          },
+          "results": 12,
+          "excluded": {
+            "blocked": 5834,
+            "unavailable": 0
+          }
+        }
+      }
+    }
+  ],
+  "cold_embedding_load_and_12_documents_ms": 1512.591,
+  "embedding_one_document": {
+    "count": 5,
+    "p50_ms": 9.028,
+    "p95_ms": 11.226,
+    "min_ms": 8.48,
+    "max_ms": 11.637
+  },
+  "cold_reranker_load_and_12_pairs_ms": 4630.701,
+  "rerank_12_pairs": {
+    "count": 5,
+    "p50_ms": 700.205,
+    "p95_ms": 715.307,
+    "min_ms": 691.882,
+    "max_ms": 716.737
+  },
+  "models": {
+    "bekko": {
+      "enabled": true,
+      "ready": true,
+      "state": "ready",
+      "error": null,
+      "backend": "openvino",
+      "warning": null
+    },
+    "horizon": {
+      "enabled": true,
+      "ready": true,
+      "state": "ready",
+      "error": null,
+      "backend": "onnx",
+      "warning": null
+    }
+  },
+  "peak_rss_bytes": 986177536,
+  "resources": {
+    "wall_seconds": 40.258,
+    "cpu_seconds": 63.641,
+    "average_cpu_percent_one_core_basis": 158.08
+  }
+}

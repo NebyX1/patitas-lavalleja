@@ -1,0 +1,11 @@
+.venv
+.data
+data
+.env
+.env.*
+!.env.example
+.pytest_cache
+**/__pycache__
+*.sqlite3*
+benchmark-results
+tests

@@ -4,6 +4,8 @@ import Icon from '../ui/Icon.astro';
 import ThemeToggle from '../islands/ThemeToggle';
 import FavoritesLink from '../islands/FavoritesLink';
 import MobileMenu from '../islands/MobileMenu';
+import AccountLink from '../islands/AccountLink';
+import SmartSearchLink from '../islands/SmartSearchLink';
 import { navigation } from '../../config/site';
 const currentPath = Astro.url.pathname;
 ---
@@ -21,6 +23,7 @@ const currentPath = Astro.url.pathname;
   <nav class="nav wrap" aria-label="Navegación principal">
     <Brand />
     <div class="nav-links">
+      <SmartSearchLink client:load />
       {navigation.map((link) => (
         <a
           href={link.href}
@@ -33,6 +36,7 @@ const currentPath = Astro.url.pathname;
     <div class="nav-actions">
       <ThemeToggle client:load />
       <FavoritesLink client:load />
+      <AccountLink client:load />
       <a class="btn btn-dark btn-small publish-button" href="/publicar/">
         Dar en adopción <Icon name="plus" class="icon-sm" />
       </a>

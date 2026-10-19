@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { useStore } from '@nanostores/react';
 import type { Pet } from '../../types/pet';
-import { petPhoto, petUrl } from '../../config/site';
+import { photoFor, petUrl, adoptionLabel } from '../../config/site';
 import { $favorites, toggleFavorite } from '../../features/preferences/store';
 import Icon from '../ui/Icon';
 
@@ -26,8 +26,8 @@ export default function PetCard({
       >
         <div className="pet-photo" data-pet-photo>
           <img
-            src={petPhoto(p.id, 480)}
-            srcSet={`${petPhoto(p.id, 480)} 480w, ${petPhoto(p.id)} 960w`}
+            src={photoFor(p, 480)}
+            srcSet={`${photoFor(p, 480)} 480w, ${photoFor(p)} 960w`}
             sizes="(max-width: 580px) 90vw, (max-width: 1060px) 44vw, 300px"
             width="480"
             height="480"
@@ -60,6 +60,10 @@ export default function PetCard({
             <span>{p.sex}</span>
           </div>
           <p className="pet-quote">{p.quote}</p>
+          <span className="sample-label">{adoptionLabel(p)}</span>
+          {p.is_demo && (
+            <span className="sample-label">Demostración · perfil ficticio</span>
+          )}
         </div>
       </a>
       <button

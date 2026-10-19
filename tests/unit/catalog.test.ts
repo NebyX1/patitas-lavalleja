@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { pets } from '../../src/data/pets';
 import {
   defaultFilters,
+  filterParams,
   selectPets,
 } from '../../src/features/catalog/selectors';
 import { readFavorites } from '../../src/features/preferences/store';
@@ -43,13 +44,40 @@ describe('catalog and preferences', () => {
       selectPets(pets, { ...defaultFilters, query: 'inexistente' }),
     ).toEqual([]);
   });
-  it('rejects corrupt, duplicate and unknown persisted favorite IDs', () => {
+  it('rejects corrupt and duplicate favorite IDs while accepting dynamically created pets', () => {
     expect(readFavorites('broken')).toEqual([]);
     expect(readFavorites('{"milo":true}')).toEqual([]);
-    expect(readFavorites('["milo","milo","unknown",null,123,"mora"]')).toEqual([
-      'milo',
-      'mora',
-    ]);
+    expect(
+      readFavorites(
+        '["milo","milo","new-pet-001",null,123,"../private","mora"]',
+      ),
+    ).toEqual(['milo', 'new-pet-001', 'mora']);
+  });
+  it('serializes combined filters for the server without inventing compatibility', () => {
+    const params = filterParams(
+      {
+        ...defaultFilters,
+        age: 'adult',
+        energy: 'calm',
+        compatibility_category: 'cats',
+        compatibility_status: 'unknown',
+      },
+      2,
+    );
+    expect(params.get('stage')).toBe('adult');
+    expect(params.get('energy')).toBe('low');
+    expect(params.get('compatibility_status')).toBe('unknown');
+    expect(params.get('page')).toBe('2');
+    expect(params.has('location')).toBe(false);
+    const combined = filterParams({
+      ...defaultFilters,
+      compatibility_category: 'cats,young_children',
+      compatibility_status: 'compatible',
+    });
+    expect(combined.get('compatibility_categories')).toBe(
+      'cats,young_children',
+    );
+    expect(combined.has('compatibility_category')).toBe(false);
   });
   it('prioritizes a calm senior while respecting the species choice', () => {
     const results = matchPets(pets, ['dog', 'calm', 'senior']);

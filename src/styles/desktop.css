@@ -172,17 +172,11 @@
     padding-block: 24px 4px;
   }
   .flow-heading p,
-  .prose-page p,
-  .profile-page .profile-panel p,
-  .profile-lead {
+  .prose-page p {
     font-size: var(--desktop-copy);
   }
   .interactive-panel .form-field,
-  .interactive-panel .quiz-option b,
-  .profile-page .profile-tab,
-  .profile-facts dd,
-  .profile-page .profile-cta,
-  .share-profile .text-link {
+  .interactive-panel .quiz-option b {
     font-size: var(--desktop-control);
   }
   .interactive-panel .form-field input,
@@ -194,17 +188,8 @@
   .interactive-panel .quiz-option small,
   .interactive-panel .quiz-footnote,
   .interactive-panel .form-checkbox,
-  .interactive-panel .demo-notice,
-  .profile-page .profile-info > .eyebrow,
-  .profile-facts dt,
-  .profile-page .profile-caretaker small,
-  .profile-page .profile-disclaimer,
-  .profile-photo-label,
-  .profile-photo-label small {
+  .interactive-panel .demo-notice {
     font-size: var(--desktop-small);
-  }
-  .profile-page .profile-caretaker b {
-    font-size: var(--desktop-control);
   }
 }
 

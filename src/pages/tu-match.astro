@@ -1,31 +1,44 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MatchQuiz from '../components/islands/MatchQuiz';
+import '../styles/match-studio.css';
 ---
 
 <BaseLayout
   title="Descubrí quién va con vos"
-  description="Tres preguntas sobre tu ritmo de vida para explorar historias de perros y gatos. Un recorrido de afinidad que orienta tu búsqueda de un compañero."
+  description="Descubrí afinidades entre las necesidades de cada animal y tu hogar. Siete pasos, recomendaciones explicables y condiciones de convivencia por confirmar."
 >
-  <section class="flow-page wrap">
-    <div class="flow-heading">
-      <div class="eyebrow">
-        <span class="dot"></span>La conexión va mucho más allá de una foto
+  <section class="match-page wrap">
+    <header class="match-page-heading">
+      <div>
+        <div class="eyebrow">
+          <span class="dot"></span>Búsqueda inteligente · Hecha para conectar
+        </div>
+        <h1>
+          Tu mundo.
+          <span>Sus patitas.</span>
+        </h1>
+        <p>
+          Contanos un poquito de vos. Hay una historia esperando encontrarse con
+          la tuya.
+        </p>
       </div>
-      <h1>
-        Tu mundo.
-        <br />
-        Sus patitas.
-      </h1>
-      <p>
-        Un punto de partida para conocerse.
-        <br />
-        Tres preguntas, muchas historias posibles.
-      </p>
-      <a class="text-link" href="/adopcion/">
-        Prefiero explorar todas las historias ↗
-      </a>
-    </div>
+      <div class="match-heading-aside">
+        <div class="match-heading-faces" aria-hidden="true">
+          <img src="/images/pets/milo-480.webp" alt="" width="64" height="64" />
+          <img src="/images/pets/mora-480.webp" alt="" width="64" height="64" />
+          <span>♡</span>
+        </div>
+        <p>
+          Dos mundos.
+          <br />
+          <strong>Una nueva historia.</strong>
+        </p>
+        <a class="text-link" href="/adopcion/">
+          Prefiero explorar el catálogo ↗
+        </a>
+      </div>
+    </header>
     <MatchQuiz client:load />
   </section>
 </BaseLayout>

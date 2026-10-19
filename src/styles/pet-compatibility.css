@@ -1,0 +1,67 @@
+.pet-compatibility {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--lilac) 25%, var(--paper));
+  margin-block: 24px;
+  min-width: 0;
+}
+.pet-compatibility h2 {
+  font: 800 clamp(23px, 2vw, 29px)/1.25 var(--display);
+  letter-spacing: -0.035em;
+  margin-block: 12px;
+}
+.pet-compatibility p {
+  font-size: var(--pet-copy);
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.pet-compatibility-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+}
+.pet-compatibility :is(.btn, .text-link) {
+  white-space: normal;
+  max-width: 100%;
+  text-align: center;
+  font-size: 16px;
+}
+.pet-compatibility .text-link {
+  margin: 0;
+}
+.pet-compatibility-start .btn {
+  margin-top: 16px;
+}
+.pet-compatibility
+  :is(
+    .profile-kicker,
+    .profile-pill,
+    .compatibility-directions span,
+    .compatibility-directions small,
+    .assessment-confidence,
+    .assessment-date,
+    .compatibility-report .profile-note
+  ) {
+  font-size: 14px;
+}
+.pet-compatibility-result {
+  min-width: 0;
+}
+.pet-compatibility .compatibility-directions {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+}
+@media (max-width: 580px) {
+  .pet-compatibility {
+    padding: 20px;
+  }
+  .pet-compatibility-actions {
+    align-items: stretch;
+  }
+  .pet-compatibility .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

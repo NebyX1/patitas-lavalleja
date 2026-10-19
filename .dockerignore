@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.astro
+.env
+.env.*
+!.env.example
+backend
+reports
+test-results
+playwright-report
+tests
+Patitas_Lavalleja_Boceto_Interactivo.html
+**/__pycache__

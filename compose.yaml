@@ -1,0 +1,76 @@
+name: patitas
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      SECRET_KEY: ${SECRET_KEY:?Generar una SECRET_KEY antes del arranque}
+      PUBLIC_SITE_URL: ${PUBLIC_SITE_URL:-https://patitas.lavalleja.uy}
+      COOKIE_SECURE: ${COOKIE_SECURE:-true}
+      CORS_ORIGINS: ${CORS_ORIGINS:-https://patitas.lavalleja.uy}
+      DATABASE_URL: sqlite:////data/db/patitas.sqlite3
+      MEDIA_DIR: /data/media
+      LANCEDB_PATH: /data/lance
+      MODEL_CACHE_DIR: /data/models
+      EMBEDDING_BACKEND: ${EMBEDDING_BACKEND:-openvino}
+      AI_ENABLED: ${AI_ENABLED:-true}
+      RERANK_ENABLED: ${RERANK_ENABLED:-true}
+      AI_THREADS: ${AI_THREADS:-2}
+      AI_MAX_CONCURRENT: 1
+      RERANK_POOL_SIZE: ${RERANK_POOL_SIZE:-12}
+      MODEL_LOAD_TIMEOUT: ${MODEL_LOAD_TIMEOUT:-120}
+      PROXY_TRUSTED_IPS: ${PROXY_TRUSTED_IPS:-127.0.0.1}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_SENDER: ${SMTP_SENDER:-}
+      SMTP_STARTTLS: ${SMTP_STARTTLS:-true}
+    volumes:
+      - database:/data/db
+      - media:/data/media
+      - lance:/data/lance
+      - models:/data/models
+    expose:
+      - '8000'
+    restart: unless-stopped
+    init: true
+    cpus: '2.0'
+    mem_limit: 2g
+    pids_limit: 160
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PUBLIC_DATA_CONTROLLER_NAME: ${PUBLIC_DATA_CONTROLLER_NAME:-}
+        PUBLIC_PRIVACY_CONTACT: ${PUBLIC_PRIVACY_CONTACT:-}
+    environment:
+      HOST: 0.0.0.0
+      PORT: 4321
+      BACKEND_INTERNAL_URL: http://backend:8000
+    ports:
+      - '127.0.0.1:4321:4321'
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    init: true
+    cpus: '0.75'
+    mem_limit: 384m
+    pids_limit: 96
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+volumes:
+  database:
+  media:
+  lance:
+  models:

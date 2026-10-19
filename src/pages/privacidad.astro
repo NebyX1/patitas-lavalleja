@@ -1,56 +1,93 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ClearFavorites from '../components/islands/ClearFavorites';
+const controller = import.meta.env.PUBLIC_DATA_CONTROLLER_NAME;
+const contact = import.meta.env.PUBLIC_PRIVACY_CONTACT;
 ---
 
 <BaseLayout
   title="Tus datos y tu privacidad"
-  description="Conocé qué guarda Patitas Lavalleja en tu navegador: favoritos y preferencias. Los formularios de demostración no transmiten ni conservan datos personales."
+  description="Qué datos usa Patitas para cuentas, perfiles, favoritos y solicitudes; cómo elegir qué guardar y consultar tus datos."
 >
   <article class="prose-page wrap">
     <div class="eyebrow">
-      <span class="dot"></span>Tus datos, con cuidado
+      <span class="dot" />
+      Tus datos, con cuidado
     </div>
     <h1>
-      Tus historias
+      Conocernos
       <br />
-      se quedan contigo.
+      con confianza.
     </h1>
-    <p class="prose-lead">Podés explorar Patitas sin crear una cuenta.</p>
-    <h2>Lo que guarda tu navegador</h2>
+    <p class="prose-lead">
+      Podés explorar el catálogo sin crear una cuenta. La búsqueda inteligente y
+      el análisis de compatibilidad requieren iniciar sesión.
+    </p>
+    <h2>Quién trata la información</h2>
     <p>
-      Guardamos localmente los identificadores de tus favoritos y tus
-      preferencias de tema y movimiento. No contienen tu nombre, correo ni datos
-      del hogar. Podés borrarlos desde esta página o desde la configuración de
-      tu navegador.
+      {controller ||
+        'El responsable operativo del servicio debe identificarse antes de habilitarlo para adopciones reales.'}{' '}
+      {contact
+        ? `Contacto para consultas de privacidad: ${contact}.`
+        : 'El contacto de atención de datos se informará aquí antes de habilitar el servicio a personas reales.'}
+    </p>
+    <h2>Cuenta, perfil y solicitudes</h2>
+    <p>
+      Al registrarte guardamos tu nombre visible, correo y una contraseña
+      protegida; tu contraseña no puede consultarse desde el sitio. Una cookie
+      de sesión protege el acceso a tu cuenta. Podés guardar las características
+      de tu rutina y hogar para recibir recomendaciones. No solicitamos nombres,
+      fotografías ni fechas de nacimiento de niños.
+    </p>
+    <p>
+      Una evaluación temporal, con sesión iniciada, transmite tus respuestas al
+      servicio para calcular compatibilidad. No guarda un perfil de hogar a
+      menos que elijas hacerlo. El perfil guardado puede editarse o eliminarse
+      desde <a href="/cuenta/">Mi cuenta</a>.
+    </p>
+    <p>
+      Al enviar una solicitud con tu consentimiento, la organización responsable
+      recibe la información necesaria para revisarla y acompañar el proceso. Las
+      solicitudes y sus cambios de estado se conservan para poder gestionarlos.
+      Eliminar tu perfil de recomendaciones no elimina automáticamente las
+      solicitudes ya enviadas ni los registros de seguridad.
+    </p>
+    <h2>Favoritos y preferencias</h2>
+    <p>
+      Sin sesión, los favoritos se guardan en este navegador. Con sesión, se
+      guardan en tu cuenta. El tema visual y la preferencia de movimiento se
+      conservan localmente. Podés borrar tus favoritos con el siguiente control.
     </p>
     <ClearFavorites client:load />
-    <h2>Formularios y recorrido de afinidad</h2>
+    <h2>Quién puede ver tus datos</h2>
     <p>
-      Los formularios son de demostración. Sus valores solo se usan en la
-      memoria de esta página para mostrar el flujo y la vista previa. No se
-      transmiten ni se guardan en almacenamiento persistente. Al salir de la
-      página se descartan. Las respuestas del recorrido de afinidad también se
-      descartan al salir.
+      Tu perfil de hogar y las solicitudes no son públicos. El acceso se limita
+      a tu cuenta y a los responsables autorizados que intervienen en el
+      proceso. Los datos personales no aparecen en el catálogo público ni se
+      usan para entrenar sistemas de inteligencia artificial.
     </p>
-    <h2>Recursos y registros técnicos</h2>
+    <h2>Fotografías y recursos</h2>
     <p>
-      Las fuentes y fotografías se sirven desde este mismo sitio; las fotos
-      ilustrativas provienen de Unsplash. Esta versión no incluye herramientas
-      de analítica, publicidad ni cookies de seguimiento. El servidor que aloje
-      la web puede generar registros técnicos de acceso, como IP, fecha y
-      recurso solicitado, según su configuración.
+      Las fotografías publicadas se adaptan para cargar con rapidez y se elimina
+      información adjunta innecesaria. Las fuentes y fotografías se sirven desde
+      este sitio. No incorporamos publicidad ni herramientas de seguimiento
+      comercial. Compartir un enlace puede abrir aplicaciones de tu dispositivo,
+      según tu elección.
+    </p>
+    <h2>Conservación, seguridad y tus consultas</h2>
+    <p>
+      La información se conserva mientras sea necesaria para la cuenta y la
+      gestión de solicitudes. Los registros de auditoría y las copias de
+      seguridad tienen finalidades de integridad y recuperación. El responsable
+      operativo debe definir y comunicar los plazos de conservación y el
+      procedimiento de acceso, rectificación y eliminación antes de usar datos
+      reales.
     </p>
     <p>
-      Si elegís compartir una historia, tu navegador puede abrir las
-      aplicaciones disponibles en tu dispositivo. Vos decidís dónde compartir el
-      enlace.
-    </p>
-    <h2>Próximas conexiones</h2>
-    <p>
-      Antes de conectar formularios a un servicio real, esta información deberá
-      actualizarse con la identidad y contacto de los responsables, las
-      finalidades, el tratamiento de datos y las condiciones de ese servicio.
+      Los registros técnicos pueden incluir fecha, recurso solicitado e
+      información de conexión necesaria para proteger el servicio. Los
+      formularios de tránsito y voluntariado siguen siendo recorridos de
+      demostración: no transmiten ni guardan sus valores.
     </p>
   </article>
 </BaseLayout>

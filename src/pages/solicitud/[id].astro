@@ -1,49 +1,77 @@
 ---
+export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DemoForm from '../../components/islands/DemoForm';
-import { pets } from '../../data/pets';
-import type { Pet } from '../../types/pet';
-import { petPhoto, petUrl } from '../../config/site';
-export function getStaticPaths() {
-  return pets.map((pet) => ({ params: { id: pet.id }, props: { pet } }));
+import { serverPet } from '../../lib/server';
+import { ApiError } from '../../lib/api';
+import { photoFor, petUrl } from '../../config/site';
+let pet = null;
+let error = '';
+try {
+  pet = await serverPet(Astro.params.id ?? '');
+} catch (failure) {
+  Astro.response.status =
+    failure instanceof ApiError && failure.status === 404 ? 404 : 503;
+  error =
+    failure instanceof Error
+      ? failure.message
+      : 'No pudimos consultar este perfil.';
 }
-interface Props {
-  pet: Pet;
-}
-const { pet } = Astro.props;
+Astro.response.headers.set('Cache-Control', 'no-store');
 ---
 
-<BaseLayout title={`Quiero conocer a ${pet.name}`} noindex>
-  <section class="flow-page wrap">
-    <div class="flow-heading">
-      <div class="eyebrow">
-        <span class="dot"></span>El primer hola
+<BaseLayout
+  title={pet ? `Quiero conocer a ${pet.name}` : 'Solicitud no disponible'}
+  noindex
+>
+  {pet ? (
+    <section class="flow-page wrap">
+      <div class="flow-heading">
+        <div class="eyebrow">
+          <span class="dot" />
+          El primer hola
+        </div>
+        <h1>
+          ¿Le decimos
+          <br />
+          hola a <span>{pet.name}?</span>
+        </h1>
+        <p>
+          El primer contacto para conocer su mundo y conversar sobre una posible
+          adopción.
+        </p>
+        <a class="request-pet" href={petUrl(pet.id)}>
+          <img
+            src={photoFor(pet, 480)}
+            alt={pet.alt}
+            width="480"
+            height="480"
+          />
+          <span>
+            <strong>{pet.name}</strong>
+            <small>
+              {pet.age} · {pet.location}
+            </small>
+            <small>Volver a su historia ↗</small>
+          </span>
+        </a>
       </div>
-      <h1>
-        ¿Le decimos
-        <br />
-        hola a <span>{pet.name}?</span>
-      </h1>
-      <p>
-        Este sería el primer contacto para conocer su mundo y conversar sobre
-        una posible adopción.
-      </p>
-      <a class="request-pet" href={petUrl(pet.id)}>
-        <img
-          src={petPhoto(pet.id, 480)}
-          alt={pet.alt}
-          width="480"
-          height="480"
-        />
-        <span>
-          <strong>{pet.name}</strong>
-          <small>
-            {pet.age} · {pet.location}
-          </small>
-          <small>Volver a su historia ↗</small>
-        </span>
+      <DemoForm
+        kind="adoption"
+        petName={pet.name}
+        petId={pet.id}
+        isDemo={pet.is_demo}
+        available={pet.adoption_status === 'available'}
+        client:load
+      />
+    </section>
+  ) : (
+    <section class="prose-page wrap">
+      <h1>No pudimos abrir esta solicitud.</h1>
+      <p>{error}</p>
+      <a class="btn btn-orange" href="/adopcion/">
+        Volver al catálogo
       </a>
-    </div>
-    <DemoForm kind="adoption" petName={pet.name} client:load />
-  </section>
+    </section>
+  )}
 </BaseLayout>

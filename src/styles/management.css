@@ -1,0 +1,389 @@
+.management-page {
+  padding-block: 64px 90px;
+}
+.management-page > .flow-heading p {
+  max-width: 65ch;
+}
+.management-panel {
+  padding: clamp(22px, 3vw, 46px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  margin-top: 36px;
+  min-width: 0;
+}
+.management-panel :is(h2, h3, h4, p, dd, small, summary) {
+  overflow-wrap: anywhere;
+}
+.management-panel .btn {
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+}
+.management-panel h2 {
+  font: 800 clamp(27px, 3vw, 42px)/1.15 var(--display);
+  letter-spacing: -0.05em;
+  margin-bottom: 16px;
+}
+.management-panel h3 {
+  font: 800 23px/1.25 var(--display);
+  letter-spacing: -0.03em;
+  margin-block: 16px;
+}
+.management-panel p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.management-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: start;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.management-title-row > div {
+  min-width: 0;
+  flex: 1;
+}
+.management-panel .management-title-row .text-link {
+  margin-top: 0;
+}
+.management-title-row .btn {
+  flex-shrink: 0;
+}
+.management-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.management-tabs .species-tab {
+  font-size: 14px;
+  min-height: 44px;
+}
+.management-tabs .active {
+  background: var(--ink);
+  color: var(--white);
+}
+.account-form {
+  max-width: 530px;
+}
+.management-fields {
+  display: grid;
+  gap: 20px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.management-fields > * {
+  min-width: 0;
+}
+.management-fields details > summary {
+  padding-block: 10px;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.management-fields details[open] > summary {
+  margin-bottom: 16px;
+}
+.management-fields .btn {
+  margin-top: 8px;
+}
+.management-fields small {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.management-panel .form-field input,
+.management-panel .form-field select,
+.management-panel .form-field textarea {
+  min-height: 48px;
+  font-size: 16px;
+  max-width: 100%;
+}
+.management-panel .form-field textarea {
+  min-height: 110px;
+}
+.management-panel .form-field label {
+  font-size: 14px;
+}
+.management-panel .form-checkbox {
+  margin: 0;
+  font-size: 14px;
+}
+.management-panel a:not(.btn):not(.species-tab) {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.management-panel .text-link {
+  margin-top: 20px;
+}
+.management-message {
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: color-mix(in srgb, var(--lime) 35%, var(--white));
+  color: var(--ink) !important;
+}
+.management-message.is-error {
+  background: color-mix(in srgb, var(--orange) 10%, var(--white));
+  border-color: var(--orange);
+}
+.account-sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-block: 30px 40px;
+}
+.management-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px;
+  min-width: 0;
+}
+.management-panel section > .management-card + .management-card {
+  margin-top: 24px;
+}
+.account-profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.account-profile-actions .text-link {
+  margin: 0;
+  padding-block: 6px;
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
+  line-height: 1.6;
+}
+.management-card > .icon {
+  width: 30px;
+  height: 30px;
+  color: var(--orange);
+}
+.management-facts {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.management-facts dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+.management-facts dd {
+  margin: 0;
+  font-size: 15px;
+}
+.management-danger {
+  color: var(--orange-dark);
+  font-size: 14px;
+}
+.management-list {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+}
+.management-list > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.management-list > li > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.management-list small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.management-status {
+  display: inline-flex;
+  padding: 6px 11px;
+  background: var(--lilac);
+  border-radius: 30px;
+  font-size: 12px;
+  color: var(--ink);
+  max-width: 100%;
+  line-height: 1.5;
+}
+.management-footnote {
+  margin-top: 30px;
+  font-size: 13px !important;
+}
+.admin-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.5fr);
+  gap: 30px;
+  align-items: start;
+}
+.admin-layout > * {
+  min-width: 0;
+}
+.admin-list {
+  max-height: 650px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.admin-pet-button {
+  width: 100%;
+  text-align: left;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.admin-pet-button[aria-pressed='true'] {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange);
+}
+.admin-pet-button small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-block: 24px;
+}
+.admin-actions .btn {
+  font-size: 13px;
+  min-height: 44px;
+  padding-inline: 18px;
+}
+.admin-checkboxes {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-block: 12px;
+}
+.admin-checkboxes label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+.admin-checkboxes input {
+  accent-color: var(--orange);
+}
+.admin-photo-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-block: 20px;
+}
+.admin-photo {
+  width: 110px;
+}
+.admin-photo img {
+  width: 110px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.admin-photo button {
+  font-size: 12px;
+  padding: 7px;
+  background: transparent;
+  text-decoration: underline;
+}
+.admin-compatibilities {
+  display: grid;
+  gap: 16px;
+  margin-block: 24px;
+}
+.admin-compatibility {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.admin-compatibility .form-grid {
+  gap: 12px;
+}
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.admin-table th,
+.admin-table td {
+  padding: 14px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.admin-table th {
+  font-size: 12px;
+  color: var(--muted);
+}
+.admin-table-wrap {
+  overflow-x: auto;
+}
+.admin-table td > small {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+}
+.admin-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+[data-theme='dark'] .management-danger {
+  color: var(--orange);
+}
+@media (max-width: 767px) {
+  .management-page {
+    padding-block: 35px 60px;
+  }
+  .management-title-row {
+    flex-direction: column;
+  }
+  .account-sections,
+  .admin-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .management-card {
+    padding: 22px;
+  }
+  .management-list > li {
+    align-items: start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .management-panel {
+    padding: 22px 18px;
+  }
+  .admin-list {
+    max-height: 330px;
+  }
+  .admin-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

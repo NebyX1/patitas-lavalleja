@@ -20,6 +20,10 @@ dialog::backdrop {
   overscroll-behavior: contain;
 }
 .profile-shell {
+  --pet-copy: 1rem;
+  --pet-meta: 0.875rem;
+  --pet-control: 1rem;
+  --pet-value: 1.0625rem;
   width: min(1050px, 100%);
   margin: auto;
   background: var(--paper);
@@ -66,12 +70,14 @@ dialog::backdrop {
 }
 .profile-visual-tag {
   position: absolute;
-  top: 29px;
-  left: 29px;
+  top: 16px;
+  left: 16px;
   border-radius: 30px;
   background: var(--lime);
   padding: 8px 13px;
-  font-size: 10px;
+  font-size: var(--pet-meta);
+  line-height: 1.5;
+  max-width: calc(100% - 32px);
   display: flex;
   align-items: center;
   gap: 7px;
@@ -102,7 +108,9 @@ dialog::backdrop {
   align-items: center;
   justify-content: space-between;
   padding: 14px 4px 0;
-  font-size: 10px;
+  font-size: var(--pet-meta);
+  line-height: 1.6;
+  flex-wrap: wrap;
   gap: 10px;
 }
 .profile-photo-label span {
@@ -115,16 +123,17 @@ dialog::backdrop {
   height: 13px;
 }
 .profile-photo-label small {
-  font-size: 8px;
+  font-size: var(--pet-meta);
   color: var(--muted);
 }
 .profile-info {
   padding: 35px 33px 23px;
   position: relative;
+  min-width: 0;
 }
 .profile-info > .eyebrow {
-  font-size: 8px;
-  color: #6e7961;
+  font-size: var(--pet-meta);
+  color: var(--muted);
   margin: 5px 42px 10px 0;
 }
 .profile-info > .eyebrow .dot {
@@ -158,20 +167,20 @@ dialog::backdrop {
   color: #fff;
 }
 .profile-lead {
-  font-size: 13px;
+  font-size: var(--pet-copy);
   margin-top: 9px;
   line-height: 1.6;
 }
 .profile-facts {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   padding: 18px 0;
   border-block: 1px solid var(--line);
   margin: 20px 0 18px;
   gap: 14px;
 }
 .profile-facts dt {
-  font-size: 10px;
+  font-size: var(--pet-meta);
   color: var(--muted);
   margin-bottom: 4px;
   display: flex;
@@ -179,12 +188,13 @@ dialog::backdrop {
   gap: 4px;
 }
 .profile-facts dt .icon {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
 }
 .profile-facts dd {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--pet-value);
+  overflow-wrap: anywhere;
   font-weight: 650;
 }
 .profile-tabs {
@@ -195,7 +205,9 @@ dialog::backdrop {
 .profile-tab {
   padding: 0 0 10px;
   background: none;
-  font-size: 11px;
+  font-size: var(--pet-control);
+  line-height: 1.5;
+  text-align: left;
   position: relative;
   color: var(--muted);
 }
@@ -214,36 +226,39 @@ dialog::backdrop {
 }
 .profile-panel {
   min-height: 167px;
-  padding: 16px 0 8px;
+  padding: 22px 0 16px;
 }
 .profile-panel p {
-  font-size: 13px;
-  line-height: 1.85;
+  font-size: var(--pet-copy);
+  line-height: 1.75;
 }
 .profile-panel p + p {
   margin-top: 9px;
 }
 .personality-chips {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
   margin-top: 13px;
 }
 .personality-chips span {
-  padding: 5px 9px;
+  padding: 7px 12px;
   border-radius: 50px;
   background: #e9ecdf;
-  font-size: 9px;
+  font-size: var(--pet-meta);
+  line-height: 1.5;
 }
 .compat-list {
   display: grid;
-  gap: 8px;
+  gap: 16px;
 }
 .compat-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: var(--pet-copy);
+  flex-wrap: wrap;
+  gap: 10px 16px;
 }
 .compat-item > span {
   display: flex;
@@ -251,23 +266,27 @@ dialog::backdrop {
   gap: 6px;
 }
 .compat-item .icon {
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   color: #6e7d5d;
 }
 .compat-item b {
-  font-size: 9px;
+  font-size: var(--pet-meta);
   font-weight: 500;
   background: #e7ebdc;
-  padding: 3px 8px;
+  padding: 6px 11px;
   border-radius: 30px;
+  line-height: 1.5;
+  max-width: 100%;
 }
 .energy {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 10px;
-  margin-top: 13px;
+  font-size: var(--pet-meta);
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 .energy-bars {
   display: flex;
@@ -284,18 +303,20 @@ dialog::backdrop {
 }
 .care-list {
   display: grid;
-  gap: 9px;
+  gap: 14px;
 }
 .care-list > span {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-size: 11px;
+  font-size: var(--pet-copy);
+  line-height: 1.7;
   color: var(--muted);
 }
 .care-list .icon {
-  height: 15px;
-  width: 15px;
+  height: 18px;
+  width: 18px;
+  margin-top: 4px;
   color: #789163;
 }
 .profile-caretaker {
@@ -304,8 +325,8 @@ dialog::backdrop {
   align-items: center;
   background: #edeedf;
   border-radius: 13px;
-  padding: 12px;
-  margin-top: 8px;
+  padding: 16px;
+  margin-top: 16px;
 }
 .caretaker-icon {
   width: 34px;
@@ -322,27 +343,35 @@ dialog::backdrop {
   height: 18px;
 }
 .profile-caretaker b {
-  font-size: 10px;
+  font-size: var(--pet-control);
   font-weight: 600;
   display: block;
 }
 .profile-caretaker small {
   display: block;
   color: var(--muted);
-  font-size: 9px;
-  margin-top: 2px;
+  font-size: var(--pet-meta);
+  line-height: 1.65;
+  margin-top: 4px;
 }
 .profile-cta {
   width: 100%;
   margin-top: 17px;
   min-height: 50px;
-  font-size: 12px;
+  font-size: var(--pet-control);
 }
 .profile-disclaimer {
-  font-size: 8px;
+  font-size: var(--pet-meta);
   text-align: center;
-  margin-top: 8px;
-  color: #7b8070;
+  margin-top: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+@media (min-width: 1061px) {
+  .profile-shell {
+    --pet-copy: 1.0625rem;
+    --pet-value: 1.125rem;
+  }
 }
 body.locked .polaroid {
   animation-play-state: paused;

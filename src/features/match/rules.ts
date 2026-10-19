@@ -10,7 +10,7 @@ export function matchPets(pets: Pet[], answers: Answers) {
       pet: p,
       score:
         10 -
-        Math.abs(p.energy - desired) * 2 +
+        Math.abs((p.energy ?? desired) - desired) * 2 +
         (priority === 'small' && p.smallSpace ? 3 : 0) +
         (priority === 'senior' && p.stage === 'senior' ? 5 : 0),
     }))

@@ -1,5 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { chooseTestUser } from './support/session';
 
 async function pickFormOption(page: Page, field: string, option: string) {
   await page.getByRole('button', { name: new RegExp(`^${field}`) }).click();
@@ -12,9 +13,11 @@ test('catalog, client routing, tabs and persistent favorites', async ({
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/adopcion/');
-  await expect(page.locator('.pet-card')).toHaveCount(8);
+  await expect(page.locator('.pet-card')).not.toHaveCount(0);
   await page.getByRole('button', { name: 'Gatos', exact: true }).click();
-  await expect(page.locator('.pet-card')).toHaveCount(4);
+  await expect(page.locator('.pet-card')).toHaveCount(3);
+  await page.getByRole('button', { name: 'Filtros', exact: true }).click();
+  await pickFormOption(page, 'Disponibilidad', 'Todos los estados publicados');
   await page
     .getByRole('searchbox', { name: 'Buscar por nombre o personalidad' })
     .fill('SIMON');
@@ -76,24 +79,57 @@ test('night theme and motion survive navigation and reload', async ({
 
 test('match quiz gives usable results and can be restarted', async ({
   page,
-}) => {
+}, testInfo) => {
+  test.setTimeout(90000);
+  await chooseTestUser(page, 'ana');
   await page.goto('/tu-match/');
-  await expect(page.getByRole('button', { name: 'Seguimos' })).toBeDisabled();
+  await expect(page.getByText('Pregunta 1 de 7')).toBeVisible();
   await page.getByRole('button', { name: /Un perro/ }).click();
+  await page.getByRole('button', { name: /^Mayor/ }).click();
   await page.getByRole('button', { name: 'Seguimos' }).click();
   await page.getByRole('button', { name: /Una tarde sin apuro/ }).click();
-  await page.getByRole('button', { name: 'Seguimos' }).click();
   await page
-    .getByRole('button', { name: /Darle una oportunidad a un adulto mayor/ })
+    .getByLabel('Minutos diarios disponibles para paseos o juegos')
+    .fill('45');
+  await page.getByLabel('Horas aproximadas fuera del hogar').fill('4');
+  await page.getByRole('button', { name: 'Seguimos' }).click();
+  await page.getByRole('button', { name: /^Casa/ }).click();
+  await page.getByRole('button', { name: /^Sí/ }).click();
+  await page.getByRole('button', { name: 'Seguimos' }).click();
+  await page.getByRole('button', { name: 'Seguimos' }).click();
+  await page.getByRole('button', { name: /^Tengo experiencia/ }).click();
+  await page
+    .getByRole('button', { name: /^Puedo acompañar una adaptación/ })
     .click();
+  await page.getByRole('button', { name: /^Puedo acompañarlos/ }).click();
+  await page.getByRole('button', { name: 'Seguimos' }).click();
+  await page.getByRole('button', { name: 'Tranquilidad', exact: true }).click();
+  await page.getByRole('button', { name: 'Seguimos' }).click();
+  const evaluated = page.waitForResponse(
+    (response) =>
+      response.url().includes('/matches/search') &&
+      response.request().method() === 'POST',
+  );
   await page.getByRole('button', { name: 'Ver mis afinidades' }).click();
-  await expect(page.locator('.quiz-result-card')).toHaveCount(3);
-  await expect(page.locator('.quiz-result-card').first()).toContainText('Coco');
+  const completedSearch = await evaluated;
+  expect(completedSearch.ok()).toBe(true);
+  await expect(page.locator('.quiz-result-card').first()).toBeVisible({
+    timeout: 45000,
+  });
+  await expect(page.locator('.quiz-page')).toContainText('Coco');
+  await expect(page.locator('.quiz-page')).toContainText('Índice orientativo');
+  if (testInfo.project.name === 'desktop') {
+    await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+    await page.screenshot({
+      path: 'reports/previews/intelligence-matching-desktop.png',
+      fullPage: false,
+    });
+  }
   await page.getByRole('button', { name: 'Volver a empezar' }).click();
-  await expect(page.getByText('Pregunta 1 de 3')).toBeVisible();
+  await expect(page.getByText('Pregunta 1 de 7')).toBeVisible();
 });
 
-test('publishing shows a local preview without transmitting personal data', async ({
+test('publishing requires a real authorized account before collecting pet data', async ({
   page,
 }) => {
   const submitted: string[] = [];
@@ -101,22 +137,10 @@ test('publishing shows a local preview without transmitting personal data', asyn
     if (request.method() === 'POST') submitted.push(request.url());
   });
   await page.goto('/publicar/');
-  await page.getByLabel('Nombre de la mascota').fill('Pepita');
-  await pickFormOption(page, 'Especie', 'Gato');
-  await pickFormOption(page, 'Localidad', 'Minas');
-  await page
-    .getByLabel('Su historia y sus necesidades')
-    .fill('Una gatita tranquila que necesita un hogar seguro.');
-  await page.getByLabel('Correo del responsable').fill('prueba@example.com');
-  await page.getByRole('checkbox').check();
-  await page
-    .getByRole('button', { name: 'Revisar la ficha de ejemplo' })
-    .click();
-  await expect(page.getByRole('heading', { name: 'Pepita' })).toBeVisible();
-  await page.getByRole('button', { name: 'Completar la prueba' }).click();
   await expect(
-    page.getByText('No se envió, guardó ni publicó ningún dato.'),
+    page.getByRole('link', { name: 'Ingresar o crear una cuenta' }),
   ).toBeVisible();
+  await expect(page.getByLabel('Nombre de la mascota')).toHaveCount(0);
   expect(submitted).toEqual([]);
   expect(await page.evaluate(() => JSON.stringify(localStorage))).not.toContain(
     'prueba@example.com',
@@ -135,7 +159,7 @@ test('content and metadata are present without JavaScript', async ({
   });
   const page = await context.newPage();
   await page.goto('http://localhost:4321/adopcion/');
-  await expect(page.locator('.pet-card')).toHaveCount(8);
+  await expect(page.locator('.pet-card')).not.toHaveCount(0);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
@@ -193,23 +217,16 @@ test('hero, editorial stories, zoom and browser history remain usable', async ({
   expect(errors).toEqual([]);
 });
 
-test('adoption and volunteer flows validate and complete locally', async ({
+test('fictional adoption profiles are blocked and volunteer demos remain explicit', async ({
   page,
 }) => {
   await page.goto('/solicitud/milo/');
-  await page.getByLabel('Tu nombre', { exact: true }).fill('Alex');
-  await page
-    .getByLabel('Correo de contacto', { exact: true })
-    .fill('alex@example.com');
-  await pickFormOption(page, 'Localidad', 'Minas');
-  await page
-    .getByLabel('Contanos un poquito de tu hogar')
-    .fill('Tengo tiempo para paseos diarios y un espacio seguro.');
-  await page.getByRole('checkbox').check();
-  await page.getByRole('button', { name: 'Probar el siguiente paso' }).click();
   await expect(
-    page.getByText('No se envió, guardó ni publicó ningún dato.'),
+    page.getByRole('heading', { name: 'Esta historia es de muestra.' }),
   ).toBeVisible();
+  await expect(page.getByLabel('Contanos un poquito de tu hogar')).toHaveCount(
+    0,
+  );
   await page.goto('/sumate/?tipo=volunteer');
   await expect(
     page.getByRole('button', { name: 'Voluntariado', exact: true }),
@@ -225,7 +242,7 @@ test('adoption and volunteer flows validate and complete locally', async ({
   await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: 'Probar el siguiente paso' }).click();
   await expect(
-    page.getByText('No se envió, guardó ni publicó ningún dato.'),
+    page.getByText(/No se envió, guardó ni publicó ningún dato/),
   ).toBeVisible();
 });
 
@@ -263,10 +280,14 @@ test('static SEO endpoints and unique canonical pages are correct', async ({
     'Sitemap: https://patitas.lavalleja.uy/sitemap-index.xml',
   );
   expect(await (await request.get('/llms.txt')).text()).toContain(
-    'Todos los perfiles e historias son ficticios',
+    'Las fichas marcadas como demostración son ficticias',
   );
   const sitemap = await (await request.get('/sitemap-0.xml')).text();
-  expect(sitemap).toContain('https://patitas.lavalleja.uy/mascotas/milo/');
+  expect(sitemap).toContain('https://patitas.lavalleja.uy/tu-match/');
+  const petSitemap = await (await request.get('/sitemap-pets.xml')).text();
+  expect(petSitemap).not.toContain('/mascotas/milo/');
+  const fictional = await request.get('/mascotas/milo/');
+  expect(await fictional.text()).toContain('noindex,follow');
   expect(sitemap).not.toContain('/solicitud/');
   expect(sitemap).not.toContain('/favoritos/');
 });

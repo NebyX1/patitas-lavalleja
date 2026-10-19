@@ -1,0 +1,10 @@
+services:
+  backend:
+    environment:
+      ENVIRONMENT: development
+      DEMO_LOGIN_ENABLED: ${DEMO_LOGIN_ENABLED:-false}
+      COOKIE_SECURE: 'false'
+      PUBLIC_SITE_URL: http://localhost:4321
+      CORS_ORIGINS: http://localhost:4321,http://127.0.0.1:4321
+    ports:
+      - '127.0.0.1:8010:8000'
